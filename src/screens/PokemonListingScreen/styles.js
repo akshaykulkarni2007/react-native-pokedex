@@ -13,4 +13,10 @@ export default StyleSheet.create({
   cardColumnWrapperStyle: {
     justifyContent: 'space-between',
   },
+  navButton: {
+    width: '45%',
+    marginVertical: 10,
+    borderColor: 'green',
+    borderWidth: 1,
+  },
 });

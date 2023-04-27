@@ -1,14 +1,14 @@
 import {useState, useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Pressable} from 'react-native';
 import axios from 'axios';
 
 import {Card} from '../../components';
 
-import {API_BASE_URL} from '../../constants';
+import {API_BASE_URL, SCREEN_NAMES} from '../../constants';
 
 import styles from './styles';
 
-export const PokemonListingScreen = () => {
+export const PokemonListingScreen = ({navigation}) => {
   const [pokemons, setPokemons] = useState([]);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [nextURL, setNextURL] = useState('');
@@ -30,6 +30,7 @@ export const PokemonListingScreen = () => {
         setPokemons(prev => [
           ...prev,
           {
+            id: details.id,
             name: details.name,
             imageUrl: details.sprites.front_default,
             types: details.types.map(type => type.type.name),
@@ -73,14 +74,23 @@ export const PokemonListingScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={pokemons}
-        keyExtractor={item => item.name}
+        keyExtractor={item => item.id}
         renderItem={({item, index}) => (
-          <Card
-            title={item.name}
-            image={item.imageUrl}
-            description={`${index + 1}`.padStart(3, '0')}
-            // bgcolor={{backgroundColor: 'red'}}
-          />
+          <Pressable
+            onPress={() =>
+              navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
+                id: item.id,
+                name: item.name,
+              })
+            }
+            style={styles.navButton}>
+            <Card
+              title={item.name}
+              image={item.imageUrl}
+              description={`${item.id}`.padStart(3, '0')}
+              // bgcolor={{backgroundColor: 'red'}}
+            />
+          </Pressable>
         )}
         ListHeaderComponent={ListHeader}
         numColumns={2}

@@ -18,6 +18,7 @@ export const Navigation = () => (
       <Stack.Screen
         name={SCREEN_NAMES.POKEMON_DETAILS}
         component={PokemonDetailsScreen}
+        options={({route}) => ({title: route.params.name})}
       />
     </Stack.Navigator>
   </NavigationContainer>
