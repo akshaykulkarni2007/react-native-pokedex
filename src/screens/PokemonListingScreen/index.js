@@ -1,20 +1,38 @@
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
 
 import {Spinner, Card} from '../../components';
 
-import {useAxios} from '../../hooks';
+import {API_BASE_URL} from '../../constants';
 
 import styles from './styles';
 
 export const PokemonListingScreen = () => {
-  const {data, loading, error} = useAxios('pokemon?limit=50');
+  const [pokemons, setPokemons] = useState([]);
 
-  if (loading) {
-    return <Spinner />;
-  }
-  if (error) {
-    return <Text>Error</Text>;
-  }
+  useEffect(() => {
+    fetchPokemons();
+  }, []);
+
+  const fetchPokemons = async () => {
+    const {data: pokemonList} = await axios.get(
+      `${API_BASE_URL}pokemon?limit=2`,
+    );
+
+    pokemonList.results.forEach(async item => {
+      const {data: details} = await axios.get(item.url);
+
+      setPokemons(prev => [
+        ...prev,
+        {
+          name: details.name,
+          imageUrl: details.sprites.front_default,
+          types: details.types.map(type => type.type.name),
+        },
+      ]);
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -24,12 +42,12 @@ export const PokemonListingScreen = () => {
       </Text>
 
       <FlatList
-        data={data?.results}
-        keyExtractor={(item, index) => `pokemon-${index}`}
+        data={pokemons}
+        keyExtractor={item => item.name}
         renderItem={({item, index}) => (
           <Card
             title={item.name}
-            image={''}
+            image={item.imageUrl}
             description={`${index + 1}`.padStart(3, '0')}
             // bgcolor={'red'}
           />
