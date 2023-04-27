@@ -1,10 +1,31 @@
-export const useAxios = () => {};
+import {useEffect, useState} from 'react';
 
-// useEffect(() => {
-//   const fn = async () => {
-//     const data = await pokeAPI.get('pokemon/ditto');
-//     console.log(data.data);
-//   };
+import {pokeAPI} from '../utils';
 
-//   fn();
-// }, []);
+export const useAxios = endpoint => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getData();
+  }, [endpoint]);
+
+  const getData = async () => {
+    setLoading(true);
+    try {
+      const res = await pokeAPI(endpoint);
+      setData(res.data);
+    } catch (err) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return {
+    loading,
+    data,
+    error,
+  };
+};
