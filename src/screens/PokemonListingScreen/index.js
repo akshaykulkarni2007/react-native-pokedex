@@ -2,31 +2,27 @@ import {useState, useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import axios from 'axios';
 
-import {Spinner, Card} from '../../components';
+import {Card} from '../../components';
 
 import {API_BASE_URL} from '../../constants';
 
 import styles from './styles';
 
 export const PokemonListingScreen = () => {
-  const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [nextURL, setNextURL] = useState('');
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetchPokemons();
+    fetchInitalData();
   }, []);
 
-  const fetchPokemons = async () => {
-    setLoading(true);
-
+  const fetchPokemons = async url => {
     try {
-      const {data: pokemonList} = await axios.get(
-        `${API_BASE_URL}pokemon?limit=2`,
-      );
+      const {data: pokemonList} = await axios.get(url);
 
-      console.log(pokemonList);
+      setNextURL(pokemonList.next);
 
       pokemonList.results.forEach(async item => {
         const {data: details} = await axios.get(item.url);
@@ -42,30 +38,39 @@ export const PokemonListingScreen = () => {
       });
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
+      setError('Something went wrong...');
     }
+  };
+
+  const fetchInitalData = async () => {
+    fetchPokemons(`${API_BASE_URL}pokemon?limit=12`);
   };
 
   const handleLoadMore = async () => {
     if (!hasScrolled) {
       return null;
     }
-    console.log('scrolled');
-    //here load data from your backend
+
+    if (nextURL) {
+      fetchPokemons(nextURL);
+    }
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
-
-  return (
-    <View style={styles.container}>
+  const ListHeader = () => (
+    <>
       <Text style={styles.title}>Pokedex</Text>
       <Text style={styles.subtitle}>
         Search for any pokemon that exists on the planet
       </Text>
+    </>
+  );
 
+  if (error) {
+    return <Text>{error}</Text>;
+  }
+
+  return (
+    <View style={styles.container}>
       <FlatList
         data={pokemons}
         keyExtractor={item => item.name}
@@ -77,6 +82,7 @@ export const PokemonListingScreen = () => {
             // bgcolor={{backgroundColor: 'red'}}
           />
         )}
+        ListHeaderComponent={ListHeader}
         numColumns={2}
         columnWrapperStyle={styles.cardColumnWrapperStyle}
         onEndReached={handleLoadMore}

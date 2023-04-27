@@ -4,6 +4,7 @@ export default StyleSheet.create({
   container: {
     width: '90%',
     marginLeft: '5%',
+    marginBottom: 20,
   },
   title: {
     color: 'red',
