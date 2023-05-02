@@ -1,8 +1,11 @@
 import {StyleSheet} from 'react-native';
 
+import {COLORS} from '../constants';
+
 export const cardStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    padding: 8,
   },
   image: {
     width: 96,
@@ -15,11 +18,13 @@ export const cardStyles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    color: COLORS.DARK,
     textAlign: 'center',
     fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
   description: {
-    color: '#666',
+    color: COLORS.DARK,
     textAlign: 'center',
   },
 });

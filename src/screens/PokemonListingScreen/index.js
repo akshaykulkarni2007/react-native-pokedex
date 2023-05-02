@@ -10,6 +10,7 @@ import styles from './styles';
 
 export const PokemonListingScreen = ({navigation}) => {
   const [pokemons, setPokemons] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [nextURL, setNextURL] = useState('');
   const [error, setError] = useState(false);
@@ -23,6 +24,7 @@ export const PokemonListingScreen = ({navigation}) => {
       const {data: pokemonList} = await axios.get(url);
 
       setNextURL(pokemonList.next);
+      setTotalCount(pokemonList.count);
 
       pokemonList.results.forEach(async item => {
         const {data: details} = await axios.get(item.url);
@@ -34,6 +36,7 @@ export const PokemonListingScreen = ({navigation}) => {
             name: details.name,
             imageUrl: details.sprites.front_default,
             types: details.types.map(type => type.type.name),
+            // detailsURL: item.url,
           },
         ]);
       });
@@ -72,33 +75,37 @@ export const PokemonListingScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={pokemons}
-        keyExtractor={item => item.id}
-        renderItem={({item, index}) => (
-          <Pressable
-            onPress={() =>
-              navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
-                id: item.id,
-                name: item.name,
-              })
-            }
-            style={styles.navButton}>
-            <Card
-              title={item.name}
-              image={item.imageUrl}
-              description={`${item.id}`.padStart(3, '0')}
-              // bgcolor={{backgroundColor: 'red'}}
-            />
-          </Pressable>
-        )}
-        ListHeaderComponent={ListHeader}
-        numColumns={2}
-        columnWrapperStyle={styles.cardColumnWrapperStyle}
-        onEndReached={handleLoadMore}
-        onScroll={() => setHasScrolled(true)}
-        onEndThreshold={50}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          data={pokemons}
+          keyExtractor={item => item.id}
+          renderItem={({item, index}) => (
+            <Pressable
+              onPress={() =>
+                navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
+                  id: item.id,
+                  name: item.name,
+                  totalCount,
+                  // url: item.detailsURL,
+                })
+              }
+              style={styles.navButton}>
+              <Card
+                title={item.name}
+                image={item.imageUrl}
+                description={`${item.id}`.padStart(3, '0')}
+                // bgcolor={{backgroundColor: 'red'}}
+              />
+            </Pressable>
+          )}
+          ListHeaderComponent={ListHeader}
+          numColumns={2}
+          columnWrapperStyle={styles.cardColumnWrapperStyle}
+          onEndReached={handleLoadMore}
+          onScroll={() => setHasScrolled(true)}
+          onEndThreshold={50}
+        />
+      </View>
     </View>
   );
 };

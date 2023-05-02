@@ -13,7 +13,7 @@ export const Navigation = () => (
       <Stack.Screen
         name={SCREEN_NAMES.POKEMON_LISTING}
         component={PokemonListingScreen}
-        options={{title: 'PokeDex'}}
+        options={{title: 'Pokedex'}}
       />
       <Stack.Screen
         name={SCREEN_NAMES.POKEMON_DETAILS}
