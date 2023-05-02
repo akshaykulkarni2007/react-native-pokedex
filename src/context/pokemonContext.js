@@ -16,15 +16,20 @@ export const PokemonProvider = ({children}) => {
     stats: [],
     evolutionChain: [],
   });
+  const [types, setTypes] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [nextURL, setNextURL] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchPokemons = async url => {
+  const fetchPokemons = async (url, options) => {
+    const {limit} = options;
+
     try {
       setLoading(true);
-      const {data: pokemonList} = await axios.get(url);
+      const {data: pokemonList} = await axios.get(url, {
+        params: {limit},
+      });
 
       setNextURL(pokemonList.next);
       setTotalCount(pokemonList.count);
@@ -39,7 +44,6 @@ export const PokemonProvider = ({children}) => {
             name: details.name,
             imageUrl: details.sprites.front_default,
             types: details.types.map(type => type.type.name),
-            // detailsURL: item.url,
           },
         ]);
       });
@@ -57,7 +61,7 @@ export const PokemonProvider = ({children}) => {
 
       const {data: pokemonDetails} = await axios.get(url);
 
-      const {data: eggGroup} = await axios.get(
+      const {data: speciesData} = await axios.get(
         `${API_BASE_URL}pokemon-species/${pokemonDetails.id}`,
       );
 
@@ -68,7 +72,7 @@ export const PokemonProvider = ({children}) => {
       const {data: genders} = await axios.get(`${API_BASE_URL}gender`);
 
       const {data: evolutionChain} = await axios.get(
-        `${API_BASE_URL}evolution-chain/${pokemonDetails.id}`,
+        speciesData.evolution_chain.url,
       );
 
       const {data: weaknesses} = await axios.get(
@@ -93,7 +97,7 @@ export const PokemonProvider = ({children}) => {
           height: pokemonDetails.height,
           weight: pokemonDetails.weight,
           gender: genders.results.map(gender => gender.name),
-          eggGroup: eggGroup.egg_groups.map(group => group.name),
+          eggGroup: speciesData.egg_groups.map(group => group.name),
           abilities: pokemonDetails.abilities.map(
             ability => ability.ability.name,
           ),
@@ -116,6 +120,18 @@ export const PokemonProvider = ({children}) => {
     }
   };
 
+  const getAlltyps = async () => {
+    try {
+      const {data} = await axios.get(`${API_BASE_URL}type`);
+
+      const types = data.results.map(type => type.name);
+      setTypes(types);
+    } catch (error) {
+      setError('Something went wrong...');
+      console.log(error.message);
+    }
+  };
+
   return (
     <PokemonContext.Provider
       value={{
@@ -125,6 +141,7 @@ export const PokemonProvider = ({children}) => {
         nextURL,
         loading,
         error,
+        getAlltyps,
         fetchPokemons,
         fetchPokemonDetails,
       }}>

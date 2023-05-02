@@ -4,8 +4,30 @@ import {COLORS, POKEMON_COLORS} from '../../constants';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     marginBottom: 20,
     backgroundColor: POKEMON_COLORS.WATER,
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    marginVertical: 8,
+  },
+  searchInput: {
+    flexGrow: 1,
+    backgroundColor: COLORS.GRAY,
+    paddingHorizontal: 8,
+    borderRadius: 16,
+  },
+  filterButton: {
+    backgroundColor: COLORS.DARK,
+    padding: 16,
+    borderRadius: 16,
+  },
+  filterIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
   },
   listContainer: {
     width: '90%',

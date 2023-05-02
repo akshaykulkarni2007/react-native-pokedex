@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
   detailsRow: {
     marginVertical: 5,
   },
-  description: {},
   sectionTitle: {
     marginVertical: 16,
     fontWeight: 'bold',
@@ -38,15 +37,5 @@ export const styles = StyleSheet.create({
   },
   button: {
     flexGrow: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    backgroundColor: COLORS.DARK,
-  },
-  buttonLabel: {
-    textAlign: 'center',
-    color: COLORS.WHITE,
-  },
-  prevButton: {
-    // left: 0,
   },
 });

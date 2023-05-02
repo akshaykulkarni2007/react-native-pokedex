@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
-import {View, Text, FlatList, Pressable} from 'react-native';
+import {View, Text, FlatList, Pressable, TextInput, Image} from 'react-native';
 
-import {Card} from '../../components';
+import {Card, Filters} from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL, SCREEN_NAMES} from '../../constants';
@@ -9,17 +9,21 @@ import {API_BASE_URL, SCREEN_NAMES} from '../../constants';
 import styles from './styles';
 
 export const PokemonListingScreen = ({navigation}) => {
-  const {pokemons, totalCount, fetchPokemons, nextURL, error} =
+  const {pokemons, fetchPokemons, nextURL, error, getAlltyps} =
     useContext(PokemonContext);
 
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState(null);
 
   useEffect(() => {
     fetchInitalData();
+    getAlltyps();
   }, []);
 
   const fetchInitalData = async () => {
-    fetchPokemons(`${API_BASE_URL}pokemon?limit=12`);
+    fetchPokemons(`${API_BASE_URL}pokemon`, {limit: 12});
   };
 
   const handleLoadMore = async () => {
@@ -28,7 +32,7 @@ export const PokemonListingScreen = ({navigation}) => {
     }
 
     if (nextURL) {
-      fetchPokemons(nextURL);
+      fetchPokemons(nextURL, {limit: 12});
     }
   };
 
@@ -38,6 +42,30 @@ export const PokemonListingScreen = ({navigation}) => {
       <Text style={styles.subtitle}>
         Search for any pokemon that exists on the planet
       </Text>
+
+      <View style={styles.filterContainer}>
+        <TextInput
+          placeholder="Name or Number"
+          style={styles.searchInput}
+          value={searchTerm}
+          onChangeText={val => setSearchTerm(val)}
+        />
+
+        <Pressable
+          style={styles.filterButton}
+          onPress={() => setShowFilters(true)}>
+          <Image
+            source={require('../../assets/images/filter.png')}
+            style={styles.filterIcon}
+          />
+        </Pressable>
+      </View>
+
+      <Filters
+        showFilters={showFilters}
+        setShowFilters={setShowFilters}
+        selectedFilters={selectedFilters}
+      />
     </>
   );
 
@@ -57,8 +85,6 @@ export const PokemonListingScreen = ({navigation}) => {
                 navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
                   id: item.id,
                   name: item.name,
-                  // totalCount,
-                  // url: item.detailsURL,
                 })
               }
               style={styles.navButton}>

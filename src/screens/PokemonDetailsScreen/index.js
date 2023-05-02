@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
 import {View, ScrollView, Text, Image, Pressable} from 'react-native';
 
-import {Spinner} from '../../components';
+import {Spinner, Button} from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL} from '../../constants';
@@ -67,19 +67,21 @@ export const PokemonDetailsScreen = ({route}) => {
 
       <View style={styles.actionBar}>
         {pokemonId > 1 && (
-          <Pressable
-            onPress={() => setPokemonId(prev => (prev -= 1))}
+          <Button
+            type="dark"
+            handlePress={() => setPokemonId(prev => (prev -= 1))}
             style={styles.button}>
-            <Text style={styles.buttonLabel}>Previous Pokemon</Text>
-          </Pressable>
+            <Text>Previous</Text>
+          </Button>
         )}
 
         {pokemonId < totalCount && (
-          <Pressable
-            onPress={() => setPokemonId(prev => (prev += 1))}
-            style={[styles.button, styles.prevButton]}>
-            <Text style={styles.buttonLabel}>Next Pokemon</Text>
-          </Pressable>
+          <Button
+            type="dark"
+            handlePress={() => setPokemonId(prev => (prev += 1))}
+            style={styles.button}>
+            <Text>Next</Text>
+          </Button>
         )}
       </View>
     </ScrollView>
