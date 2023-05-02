@@ -5,7 +5,14 @@ export const PokemonContext = createContext();
 
 export const PokemonProvider = ({children}) => {
   const [pokemons, setPokemons] = useState([]);
-  const [pokemonDetails, setPokemonDetails] = useState(null);
+  const [pokemonDetails, setPokemonDetails] = useState({
+    id: '',
+    name: '',
+    // imageUrl: '',
+    attributes: {},
+    stats: [],
+    evolutionChain: {},
+  });
   const [totalCount, setTotalCount] = useState(0);
   const [nextURL, setNextURL] = useState('');
   const [error, setError] = useState(false);
@@ -41,16 +48,27 @@ export const PokemonProvider = ({children}) => {
     try {
       const {data: pokemonDetails} = await axios.get(url);
 
-      console.log(pokemonDetails.name);
-
-      // setPokemon({
-      //   id: pokemonDetails.id,
-      //   name: pokemonDetails.name,
-      //   imageUrl: pokemonDetails.sprites.front_default,
-      //   // attributes: {height: height, weight: weight, gender: , eggGroup: , abilities: pokemonDetails.abilities.map(ability => ability.ability.name), types: pokemonDetails.types.map(type => type.type.name), weakAgainst:},
-      //   // stats: pokemonDetails.stats.map(stat => ({name: stat.stat.name, value: stat.base_stat})),
-      //   // evolutionChain: {}
-      // });
+      setPokemonDetails({
+        id: pokemonDetails.id,
+        name: pokemonDetails.name,
+        imageUrl: pokemonDetails.sprites.front_default,
+        attributes: {
+          height: pokemonDetails.height,
+          weight: pokemonDetails.weight,
+          gender: '',
+          eggGroup: '',
+          abilities: pokemonDetails.abilities.map(
+            ability => ability.ability.name,
+          ),
+          types: pokemonDetails.types.map(type => type.type.name),
+          weakAgainst: '',
+        },
+        stats: pokemonDetails.stats.map(stat => ({
+          name: stat.stat.name.replace('-', ' '),
+          value: stat.base_stat,
+        })),
+        evolutionChain: {},
+      });
     } catch (error) {
       console.log(error);
       setError('Something went wrong...');
