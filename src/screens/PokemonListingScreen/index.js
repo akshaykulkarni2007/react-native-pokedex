@@ -1,50 +1,22 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {View, Text, FlatList, Pressable} from 'react-native';
-import axios from 'axios';
 
 import {Card} from '../../components';
 
+import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL, SCREEN_NAMES} from '../../constants';
 
 import styles from './styles';
 
 export const PokemonListingScreen = ({navigation}) => {
-  const [pokemons, setPokemons] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const {pokemons, totalCount, fetchPokemons, nextURL, error} =
+    useContext(PokemonContext);
+
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [nextURL, setNextURL] = useState('');
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetchInitalData();
   }, []);
-
-  const fetchPokemons = async url => {
-    try {
-      const {data: pokemonList} = await axios.get(url);
-
-      setNextURL(pokemonList.next);
-      setTotalCount(pokemonList.count);
-
-      pokemonList.results.forEach(async item => {
-        const {data: details} = await axios.get(item.url);
-
-        setPokemons(prev => [
-          ...prev,
-          {
-            id: details.id,
-            name: details.name,
-            imageUrl: details.sprites.front_default,
-            types: details.types.map(type => type.type.name),
-            // detailsURL: item.url,
-          },
-        ]);
-      });
-    } catch (error) {
-      console.log(error);
-      setError('Something went wrong...');
-    }
-  };
 
   const fetchInitalData = async () => {
     fetchPokemons(`${API_BASE_URL}pokemon?limit=12`);
@@ -85,7 +57,7 @@ export const PokemonListingScreen = ({navigation}) => {
                 navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
                   id: item.id,
                   name: item.name,
-                  totalCount,
+                  // totalCount,
                   // url: item.detailsURL,
                 })
               }

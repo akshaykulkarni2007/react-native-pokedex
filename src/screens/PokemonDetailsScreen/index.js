@@ -1,43 +1,21 @@
-import {useState, useEffect} from 'react';
-import {View, Text, Image, Pressable} from 'react-native';
-import axios from 'axios';
+import {useState, useEffect, useContext} from 'react';
+import {View, Text, Pressable} from 'react-native';
 
+import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL} from '../../constants';
 
 import {styles} from './styles';
 
 export const PokemonDetailsScreen = ({route, navigation}) => {
-  const [pokemon, setPokemon] = useState(null);
+  const {pokemonDetails, totalCount, fetchPokemonDetails} =
+    useContext(PokemonContext);
+
   const [pokemonId, setPokemonId] = useState(route.params.id);
   const [error, setError] = useState(false);
 
-  const {totalCount} = route.params;
-
   useEffect(() => {
-    fetchPokemonDetails();
+    fetchPokemonDetails(`${API_BASE_URL}pokemon/${pokemonId}`);
   }, [pokemonId]);
-
-  const fetchPokemonDetails = async () => {
-    try {
-      const {data: pokemonDetails} = await axios.get(
-        `${API_BASE_URL}pokemon/${pokemonId}`,
-      );
-
-      console.log(pokemonDetails.name, pokemonId);
-
-      // setPokemon({
-      //   id: pokemonDetails.id,
-      //   name: pokemonDetails.name,
-      //   imageUrl: pokemonDetails.sprites.front_default,
-      //   // attributes: {height: height, weight: weight, gender: , eggGroup: , abilities: pokemonDetails.abilities.map(ability => ability.ability.name), types: pokemonDetails.types.map(type => type.type.name), weakAgainst:},
-      //   // stats: pokemonDetails.stats.map(stat => ({name: stat.stat.name, value: stat.base_stat})),
-      //   // evolutionChain: {}
-      // });
-    } catch (error) {
-      console.log(error);
-      setError('Something went wrong...');
-    }
-  };
 
   if (error) {
     return <Text>{error}</Text>;

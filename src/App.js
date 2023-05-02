@@ -1,11 +1,15 @@
 import {SafeAreaView, Text, StyleSheet} from 'react-native';
 
+import {PokemonProvider} from './context/pokemonContext';
+
 import {Navigation} from './routes';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.appContainer}>
-      <Navigation />
+      <PokemonProvider>
+        <Navigation />
+      </PokemonProvider>
     </SafeAreaView>
   );
 };
