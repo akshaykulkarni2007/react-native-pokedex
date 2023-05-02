@@ -11,7 +11,7 @@ export const PokemonProvider = ({children}) => {
     id: '',
     name: '',
     description: '',
-    // imageUrl: '',
+    imageUrl: '',
     attributes: {},
     stats: [],
     evolutionChain: [],
@@ -65,6 +65,8 @@ export const PokemonProvider = ({children}) => {
         `${API_BASE_URL}characteristic/${pokemonDetails.id}`,
       );
 
+      const {data: genders} = await axios.get(`${API_BASE_URL}gender`);
+
       const {data: evolutionChain} = await axios.get(
         `${API_BASE_URL}evolution-chain/${pokemonDetails.id}`,
       );
@@ -90,13 +92,13 @@ export const PokemonProvider = ({children}) => {
         attributes: {
           height: pokemonDetails.height,
           weight: pokemonDetails.weight,
-          gender: '',
+          gender: genders.results.map(gender => gender.name),
           eggGroup: eggGroup.egg_groups.map(group => group.name),
           abilities: pokemonDetails.abilities.map(
             ability => ability.ability.name,
           ),
           types: pokemonDetails.types.map(type => type.type.name),
-          weakAgainst: weaknesses.damage_relations.double_damage_from.map(
+          'weak against': weaknesses.damage_relations.double_damage_from.map(
             type => type.name,
           ),
         },

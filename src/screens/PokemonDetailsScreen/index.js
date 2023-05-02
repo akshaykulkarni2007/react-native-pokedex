@@ -28,7 +28,10 @@ export const PokemonDetailsScreen = ({route}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={{uri: pokemonDetails.imageUrl}} style={styles.image} />
+      {pokemonDetails.imageUrl && (
+        <Image source={{uri: pokemonDetails.imageUrl}} style={styles.image} />
+      )}
+
       <Text style={styles.detailsRow}>
         <Text style={styles.label}>Name: </Text>
         <Text style={styles.value}>{pokemonDetails.name}</Text>
