@@ -80,7 +80,9 @@ export const Filters = props => {
           <Button
             type="primary"
             handlePress={() => {
+              setCheckedTypes([]);
               setSelectedTypes([]);
+              setCheckedGenders([]);
               setSelectedGenders([]);
               setShowFilters(false);
             }}

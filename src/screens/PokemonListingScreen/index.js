@@ -9,7 +9,7 @@ import {API_BASE_URL, SCREEN_NAMES, POKEMON_COLORS} from '../../constants';
 import styles from './styles';
 
 export const PokemonListingScreen = ({navigation}) => {
-  const {pokemons, fetchPokemons, nextURL, error, getAlltyps} =
+  const {pokemons, fetchPokemons, nextURL, error, getAlltyps, filterPokemons} =
     useContext(PokemonContext);
 
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -48,6 +48,10 @@ export const PokemonListingScreen = ({navigation}) => {
           style={styles.searchInput}
           value={searchTerm}
           onChangeText={val => setSearchTerm(val)}
+          returnKeyType="search"
+          onSubmitEditing={() => {
+            filterPokemons(`${API_BASE_URL}pokemon`, searchTerm);
+          }}
         />
 
         <Pressable

@@ -24,11 +24,6 @@ export const PokemonProvider = ({children}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    console.log('effect');
-    // fetch
-  }, [JSON.stringify(selectedTypes), JSON.stringify(selectedGenders)]);
-
   const fetchPokemons = async (url, limit = 12) => {
     try {
       setLoading(true);
@@ -121,6 +116,26 @@ export const PokemonProvider = ({children}) => {
     }
   };
 
+  const filterPokemons = async (url, query) => {
+    try {
+      setLoading(true);
+      const {data: result} = await axios.get(`${url}/${query}`);
+      setPokemons([
+        {
+          id: result.id,
+          name: result.name,
+          imageUrl: result.sprites.front_default,
+          types: result.types.map(type => type.type.name.toUpperCase()),
+        },
+      ]);
+    } catch (error) {
+      console.log(error);
+      setError('Something went wrong...');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const getAlltyps = async () => {
     try {
       const {data} = await axios.get(`${API_BASE_URL}type`);
@@ -150,6 +165,7 @@ export const PokemonProvider = ({children}) => {
         setSelectedGenders,
         fetchPokemons,
         fetchPokemonDetails,
+        filterPokemons,
       }}>
       {children}
     </PokemonContext.Provider>
