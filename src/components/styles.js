@@ -1,5 +1,4 @@
-import {cloneElement} from 'react';
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 import {COLORS} from '../constants';
 
@@ -34,15 +33,17 @@ export const filtersStyles = StyleSheet.create({
   filterContainer: {},
   modalContent: {
     flex: 1,
+    justifyContent: 'space-between',
     backgroundColor: COLORS.WHITE,
     marginTop: 36,
-    padding: 16,
+    // padding: 16,
   },
   modalHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
     borderBottomColor: COLORS.GRAY,
     borderBottomWidth: 1,
   },
@@ -59,5 +60,38 @@ export const filtersStyles = StyleSheet.create({
   },
   closeButtonText: {
     fontSize: 24,
+  },
+  modalBody: {
+    padding: 10,
+  },
+  modalFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    backgroundColor: COLORS.WHITE,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.GRAY,
+
+    ...Platform.select({
+      ios: {
+        shadowColor: 'rgba(0, 0, 0, 0.3)',
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowOffset: {
+          height: -5,
+          width: 0,
+        },
+      },
+      android: {
+        // elevation:   4,
+        // backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      },
+    }),
+  },
+  actionButton: {
+    flexGrow: 1,
   },
 });

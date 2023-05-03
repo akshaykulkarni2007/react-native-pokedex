@@ -1,6 +1,6 @@
-import {Text, View, Modal, Pressable, StyleSheet} from 'react-native';
+import {Text, View, Modal, Pressable, ScrollView} from 'react-native';
 
-import {Button} from './common';
+import {Button, CustomCheckBox} from './common';
 
 import {filtersStyles} from './styles';
 
@@ -20,11 +20,21 @@ export const Filters = props => {
             </Pressable>
           </View>
 
+          <ScrollView style={filtersStyles.modalBody}>
+            <CustomCheckBox label={'test'} />
+          </ScrollView>
+
           <View style={filtersStyles.modalFooter}>
-            <Button type="primary" handlePrss={() => {}}>
+            <Button
+              type="primary"
+              handlePrss={() => {}}
+              style={filtersStyles.actionButton}>
               Reset
             </Button>
-            <Button type="dark" handlePrss={() => {}}>
+            <Button
+              type="dark"
+              handlePrss={() => {}}
+              style={filtersStyles.actionButton}>
               Apply
             </Button>
           </View>
