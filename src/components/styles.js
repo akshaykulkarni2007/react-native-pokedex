@@ -71,6 +71,13 @@ export const filtersStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 8,
   },
+  typesList: {
+    maxHeight: 300,
+    padding: 10,
+  },
+  genderList: {
+    padding: 10,
+  },
   modalFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',

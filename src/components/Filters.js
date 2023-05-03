@@ -49,7 +49,7 @@ export const Filters = props => {
               </View>
             )}
             numColumns={2}
-            style={{maxHeight: 300}}
+            style={filtersStyles.typesList}
           />
 
           <Text style={filtersStyles.filterTitle}>Gender</Text>
@@ -72,6 +72,7 @@ export const Filters = props => {
               </View>
             )}
             numColumns={2}
+            style={filtersStyles.genderList}
           />
         </View>
 
