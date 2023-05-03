@@ -4,6 +4,9 @@ import {COLORS} from '../../constants';
 
 export const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLORS.BODY_BG,
+  },
+  details: {
     maxWidth: '90%',
     marginLeft: '5%',
   },
@@ -11,6 +14,17 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     resizeMode: 'contain',
+  },
+  title: {
+    color: COLORS.DARK,
+    fontSize: 24,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    marginVertical: 16,
+  },
+  description: {
+    color: COLORS.DARK,
+    fontSize: 20,
   },
   label: {
     fontWeight: 'bold',

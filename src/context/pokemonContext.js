@@ -70,10 +70,6 @@ export const PokemonProvider = ({children}) => {
         `${API_BASE_URL}pokemon-species/${pokemonDetails.id}`,
       );
 
-      const {data: description} = await axios.get(
-        `${API_BASE_URL}characteristic/${pokemonDetails.id}`,
-      );
-
       const {data: genders} = await axios.get(`${API_BASE_URL}gender`);
 
       const {data: evolutionChain} = await axios.get(
@@ -95,9 +91,9 @@ export const PokemonProvider = ({children}) => {
         id: pokemonDetails.id,
         name: pokemonDetails.name,
         imageUrl: pokemonDetails.sprites.front_default,
-        description: description.descriptions.filter(
-          d => d.language.name === 'en',
-        )[0].description,
+        description: speciesData.flavor_text_entries
+          .filter(f => f.language.name === 'en')[0]
+          .flavor_text.replace(/\n/g, ' '),
         attributes: {
           height: pokemonDetails.height,
           weight: pokemonDetails.weight,
