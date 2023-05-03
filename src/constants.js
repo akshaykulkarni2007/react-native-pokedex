@@ -7,8 +7,9 @@ export const API_BASE_URL = 'https://pokeapi.co/api/v2/';
 
 export const COLORS = {
   WHITE: '#FFF',
-  DARK: '#000',
+  DARK: '#2e3156',
   GRAY: '#CCC',
+  BODY_BG: '#DEEDED',
 };
 
 export const POKEMON_COLORS = {

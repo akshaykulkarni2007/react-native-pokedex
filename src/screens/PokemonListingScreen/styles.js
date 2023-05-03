@@ -6,7 +6,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 20,
-    backgroundColor: POKEMON_COLORS.WATER,
+    backgroundColor: COLORS.BODY_BG,
   },
   filterContainer: {
     flexDirection: 'row',
@@ -53,7 +53,7 @@ export default StyleSheet.create({
   navButton: {
     width: '45%',
     marginVertical: 10,
-    borderColor: 'green',
+    borderColor: COLORS.DARK,
     borderWidth: 1,
     borderRadius: 8,
     borderStyle: 'dashed',

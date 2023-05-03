@@ -4,7 +4,7 @@ import {View, Text, FlatList, Pressable, TextInput, Image} from 'react-native';
 import {Card, Filters} from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
-import {API_BASE_URL, SCREEN_NAMES} from '../../constants';
+import {API_BASE_URL, SCREEN_NAMES, POKEMON_COLORS} from '../../constants';
 
 import styles from './styles';
 
@@ -72,23 +72,31 @@ export const PokemonListingScreen = ({navigation}) => {
         <FlatList
           data={pokemons}
           keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <Pressable
-              onPress={() =>
-                navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
-                  id: item.id,
-                  name: item.name,
-                })
-              }
-              style={styles.navButton}>
-              <Card
-                title={item.name}
-                image={item.imageUrl}
-                description={`${item.id}`.padStart(3, '0')}
-                // bgcolor={{backgroundColor: 'red'}}
-              />
-            </Pressable>
-          )}
+          renderItem={({item}) => {
+            const gradient = item.types.map(type => POKEMON_COLORS[type]);
+
+            if (gradient.length === 1) {
+              gradient.push(gradient[0]);
+            }
+
+            return (
+              <Pressable
+                onPress={() =>
+                  navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
+                    id: item.id,
+                    name: item.name,
+                  })
+                }
+                style={styles.navButton}>
+                <Card
+                  title={item.name}
+                  image={item.imageUrl}
+                  description={`${item.id}`.padStart(3, '0')}
+                  bgcolor={gradient}
+                />
+              </Pressable>
+            );
+          }}
           ListHeaderComponent={ListHeader}
           numColumns={2}
           columnWrapperStyle={styles.cardColumnWrapperStyle}

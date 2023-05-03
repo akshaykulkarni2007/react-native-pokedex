@@ -48,7 +48,7 @@ export const PokemonProvider = ({children}) => {
             id: details.id,
             name: details.name,
             imageUrl: details.sprites.front_default,
-            types: details.types.map(type => type.type.name),
+            types: details.types.map(type => type.type.name.toUpperCase()),
           },
         ]);
       });
