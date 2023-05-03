@@ -30,13 +30,11 @@ export const cardStyles = StyleSheet.create({
 });
 
 export const filtersStyles = StyleSheet.create({
-  filterContainer: {},
   modalContent: {
     flex: 1,
     justifyContent: 'space-between',
     backgroundColor: COLORS.WHITE,
     marginTop: 36,
-    // padding: 16,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -49,6 +47,8 @@ export const filtersStyles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 24,
+    color: COLORS.DARK,
+    fontWeight: 'bold',
   },
   closeButton: {
     justifyContent: 'center',
@@ -62,7 +62,14 @@ export const filtersStyles = StyleSheet.create({
     fontSize: 24,
   },
   modalBody: {
-    padding: 10,
+    paddingBottom: 10,
+    paddingHorizontal: 10,
+  },
+  filterTitle: {
+    color: COLORS.DARK,
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 8,
   },
   modalFooter: {
     flexDirection: 'row',

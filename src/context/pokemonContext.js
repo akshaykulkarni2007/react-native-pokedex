@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
 
 import {API_BASE_URL} from '../constants';
@@ -17,14 +17,19 @@ export const PokemonProvider = ({children}) => {
     evolutionChain: [],
   });
   const [types, setTypes] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [selectedGenders, setSelectedGenders] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [nextURL, setNextURL] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchPokemons = async (url, options) => {
-    const {limit} = options;
+  useEffect(() => {
+    console.log('effect');
+    // fetch
+  }, [JSON.stringify(selectedTypes), JSON.stringify(selectedGenders)]);
 
+  const fetchPokemons = async (url, limit = 12) => {
     try {
       setLoading(true);
       const {data: pokemonList} = await axios.get(url, {
@@ -137,11 +142,16 @@ export const PokemonProvider = ({children}) => {
       value={{
         pokemons,
         pokemonDetails,
+        selectedTypes,
+        selectedGenders,
         totalCount,
+        types,
         nextURL,
         loading,
         error,
         getAlltyps,
+        setSelectedTypes,
+        setSelectedGenders,
         fetchPokemons,
         fetchPokemonDetails,
       }}>

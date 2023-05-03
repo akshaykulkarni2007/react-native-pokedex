@@ -30,11 +30,6 @@ export const buttonStyles = StyleSheet.create({
 });
 
 export const checkboxStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   checkboxContainer: {
     flexDirection: 'row',
     marginBottom: 20,
@@ -44,5 +39,6 @@ export const checkboxStyles = StyleSheet.create({
   },
   label: {
     margin: 8,
+    flexGrow: 1,
   },
 });

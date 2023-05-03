@@ -15,7 +15,6 @@ export const PokemonListingScreen = ({navigation}) => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedFilters, setSelectedFilters] = useState(null);
 
   useEffect(() => {
     fetchInitalData();
@@ -23,7 +22,7 @@ export const PokemonListingScreen = ({navigation}) => {
   }, []);
 
   const fetchInitalData = async () => {
-    fetchPokemons(`${API_BASE_URL}pokemon`, {limit: 12});
+    fetchPokemons(`${API_BASE_URL}pokemon`);
   };
 
   const handleLoadMore = async () => {
@@ -32,7 +31,7 @@ export const PokemonListingScreen = ({navigation}) => {
     }
 
     if (nextURL) {
-      fetchPokemons(nextURL, {limit: 12});
+      fetchPokemons(nextURL);
     }
   };
 
@@ -60,12 +59,6 @@ export const PokemonListingScreen = ({navigation}) => {
           />
         </Pressable>
       </View>
-
-      <Filters
-        showFilters={showFilters}
-        setShowFilters={setShowFilters}
-        selectedFilters={selectedFilters}
-      />
     </>
   );
 
@@ -79,7 +72,7 @@ export const PokemonListingScreen = ({navigation}) => {
         <FlatList
           data={pokemons}
           keyExtractor={item => item.id}
-          renderItem={({item, index}) => (
+          renderItem={({item}) => (
             <Pressable
               onPress={() =>
                 navigation.navigate(SCREEN_NAMES.POKEMON_DETAILS, {
@@ -104,6 +97,8 @@ export const PokemonListingScreen = ({navigation}) => {
           onEndThreshold={50}
         />
       </View>
+
+      <Filters showFilters={showFilters} setShowFilters={setShowFilters} />
     </View>
   );
 };
