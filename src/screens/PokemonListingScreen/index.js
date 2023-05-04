@@ -75,7 +75,9 @@ export const PokemonListingScreen = ({navigation}) => {
             );
           }}
           ListEmptyComponent={PokemonEmptyList}
-          ListHeaderComponent={PokemonListHeader}
+          ListHeaderComponent={
+            <PokemonListHeader setShowFilters={setShowFilters} />
+          }
           numColumns={2}
           columnWrapperStyle={styles.cardColumnWrapperStyle}
           onEndReached={handleLoadMore}

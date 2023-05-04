@@ -7,8 +7,8 @@ import {API_BASE_URL} from '../constants';
 
 import {pokemonListHeaderStyles} from './styles';
 
-export const PokemonListHeader = () => {
-  const {filterPokemons} = useContext(PokemonContext);
+export const PokemonListHeader = ({setShowFilters}) => {
+  const {searchPokemons} = useContext(PokemonContext);
 
   const [searchTerm, setSearchTerm] = useState('');
   return (
@@ -26,9 +26,7 @@ export const PokemonListHeader = () => {
           onChangeText={val => setSearchTerm(val)}
           returnKeyType="search"
           onSubmitEditing={() => {
-            // if (searchTerm.trim().length > 0) {
-            filterPokemons(`${API_BASE_URL}pokemon`, searchTerm);
-            // }
+            searchPokemons(`${API_BASE_URL}pokemon`, searchTerm);
           }}
         />
 

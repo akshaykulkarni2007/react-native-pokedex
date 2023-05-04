@@ -33,6 +33,16 @@ export const PokemonProvider = ({children}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    console.log('calling');
+    if (selectedTypes.length) {
+      console.log('selected');
+      getPokemonsByTypes();
+    } else {
+      fetchPokemons(`${API_BASE_URL}pokemon`);
+    }
+  }, [JSON.stringify(selectedTypes)]);
+
   const fetchPokemons = async (url, limit = 12) => {
     try {
       setLoading(true);
@@ -120,12 +130,14 @@ export const PokemonProvider = ({children}) => {
     }
   };
 
-  const filterPokemons = async (url, query) => {
+  const searchPokemons = async (url, query) => {
     if (query.trim().length === 0) {
       fetchPokemons(`${API_BASE_URL}pokemon`);
     } else {
       try {
         setLoading(true);
+        setNextURL('');
+
         const {data: result} = await axios.get(`${url}/${query}`);
 
         const listItem = pokemonListItem(result);
@@ -138,6 +150,47 @@ export const PokemonProvider = ({children}) => {
       } finally {
         setLoading(false);
       }
+    }
+  };
+
+  const getPokemonsByTypes = async () => {
+    try {
+      setLoading(true);
+      setPokemons([]);
+      setNextURL('');
+      const pokemonSet = [];
+      const result = [];
+
+      selectedTypes.forEach(async type => {
+        const {data: typePokemon} = await axios.get(
+          `${API_BASE_URL}type/${type}`,
+        );
+
+        typePokemon.pokemon.forEach(item => {
+          const itemExists = pokemonSet.find(x => x.name === item.pokemon.name);
+
+          if (!itemExists) {
+            pokemonSet.push({
+              name: item.pokemon.name,
+              url: item.pokemon.url,
+            });
+          }
+        });
+
+        pokemonSet.forEach(async item => {
+          const {data: details} = await axios.get(item.url);
+          const listItem = pokemonListItem(details);
+
+          result.push(listItem);
+        });
+        setPokemons(result);
+      });
+    } catch (error) {
+      console.log(error);
+      setPokemons([]);
+      setError('Something went wrong...');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -170,7 +223,7 @@ export const PokemonProvider = ({children}) => {
         setSelectedGenders,
         fetchPokemons,
         fetchPokemonDetails,
-        filterPokemons,
+        searchPokemons,
       }}>
       {children}
     </PokemonContext.Provider>
