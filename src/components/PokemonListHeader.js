@@ -19,16 +19,28 @@ export const PokemonListHeader = ({setShowFilters}) => {
       </Text>
 
       <View style={pokemonListHeaderStyles.filterContainer}>
-        <TextInput
-          placeholder="Name or Number"
-          style={pokemonListHeaderStyles.searchInput}
-          value={searchTerm}
-          onChangeText={val => setSearchTerm(val)}
-          returnKeyType="search"
-          onSubmitEditing={() => {
-            searchPokemons(`${API_BASE_URL}pokemon`, searchTerm);
-          }}
-        />
+        <View style={pokemonListHeaderStyles.searchBar}>
+          <Pressable
+            style={pokemonListHeaderStyles.searchButton}
+            onPress={() =>
+              searchPokemons(`${API_BASE_URL}pokemon`, searchTerm)
+            }>
+            <Image
+              source={require('../assets/images/search.png')}
+              style={pokemonListHeaderStyles.searchIcon}
+            />
+          </Pressable>
+          <TextInput
+            placeholder="Name or Number"
+            style={pokemonListHeaderStyles.searchInput}
+            value={searchTerm}
+            onChangeText={val => setSearchTerm(val)}
+            returnKeyType="search"
+            onSubmitEditing={() => {
+              searchPokemons(`${API_BASE_URL}pokemon`, searchTerm);
+            }}
+          />
+        </View>
 
         <Pressable
           style={pokemonListHeaderStyles.filterButton}
