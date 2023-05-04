@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PokemonDetailsScreen correctly renders screen correctly 1`] = `
+<RCTScrollView
+  style={
+    {
+      "backgroundColor": "#DEEDED",
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        {
+          "marginLeft": "5%",
+          "maxWidth": "90%",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#2e3156",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "marginVertical": 16,
+            "textTransform": "uppercase",
+          }
+        }
+      />
+      <Text
+        style={
+          {
+            "color": "#2e3156",
+            "fontSize": 20,
+          }
+        }
+      />
+      <Text
+        style={
+          {
+            "fontSize": 20,
+            "fontWeight": "bold",
+            "marginVertical": 16,
+          }
+        }
+      >
+        Physical Attributes
+      </Text>
+      <Text
+        style={
+          {
+            "fontSize": 20,
+            "fontWeight": "bold",
+            "marginVertical": 16,
+          }
+        }
+      >
+        Stats
+      </Text>
+      <Text>
+        <Text
+          style={
+            {
+              "fontWeight": "bold",
+              "textTransform": "capitalize",
+            }
+          }
+        >
+          Evolution Chain: 
+        </Text>
+        <Text
+          style={
+            {
+              "fontWeight": "normal",
+            }
+          }
+        />
+      </Text>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "display": "flex",
+            "flexDirection": "row",
+            "gap": 10,
+            "justifyContent": "space-between",
+            "marginVertical": 24,
+          }
+        }
+      />
+    </View>
+  </View>
+</RCTScrollView>
+`;

@@ -126,10 +126,12 @@ export const PokemonProvider = ({children}) => {
 
   const searchPokemons = async (url, query) => {
     if (query.trim().length === 0) {
+      setPokemons([]);
       fetchPokemons(`${API_BASE_URL}pokemon`);
     } else {
       try {
         setLoading(true);
+        setPokemons([]);
         setNextURL('');
 
         const {data: result} = await axios.get(`${url}/${query}`);

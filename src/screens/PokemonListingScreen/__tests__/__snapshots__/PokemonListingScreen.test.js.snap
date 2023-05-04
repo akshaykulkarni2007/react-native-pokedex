@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#DEEDED",
+      "flex": 1,
+      "marginBottom": 20,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "marginLeft": "5%",
+        "width": "90%",
+      }
+    }
+  >
+    <RCTScrollView
+      ListEmptyComponent={[Function]}
+      ListHeaderComponent={
+        <PokemonListHeader
+          setShowFilters={[Function]}
+        />
+      }
+      data={[]}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onEndReached={[Function]}
+      onEndThreshold={50}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
+    >
+      <View>
+        <View
+          onLayout={[Function]}
+        >
+          <Text
+            style={
+              {
+                "borderBottomColor": "#2e3156",
+                "borderBottomWidth": 1,
+                "color": "#2e3156",
+                "fontSize": 32,
+                "fontWeight": "bold",
+                "letterSpacing": 2,
+                "marginTop": 16,
+                "paddingBottom": 8,
+              }
+            }
+          >
+            Pokedex
+          </Text>
+          <Text
+            style={
+              {
+                "fontSize": 18,
+                "marginVertical": 8,
+              }
+            }
+          >
+            Search for any pokemon that exists on the planet
+          </Text>
+          <View
+            style={
+              {
+                "flexDirection": "row",
+                "gap": 16,
+                "marginVertical": 8,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "position": "relative",
+                }
+              }
+            >
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "position": "absolute",
+                    "right": 8,
+                    "zIndex": 10,
+                  }
+                }
+              >
+                <Image
+                  source={
+                    {
+                      "testUri": "../../../src/assets/images/search.png",
+                    }
+                  }
+                  style={
+                    {
+                      "height": 20,
+                      "width": 20,
+                    }
+                  }
+                />
+              </View>
+              <TextInput
+                onChangeText={[Function]}
+                onSubmitEditing={[Function]}
+                placeholder="Name or Number"
+                returnKeyType="search"
+                style={
+                  {
+                    "backgroundColor": "#CCC",
+                    "borderRadius": 16,
+                    "flexGrow": 1,
+                    "paddingHorizontal": 8,
+                    "paddingVertical": 20,
+                  }
+                }
+                value=""
+              />
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "backgroundColor": "#2e3156",
+                  "borderRadius": 16,
+                  "paddingHorizontal": 20,
+                  "paddingVertical": 16,
+                }
+              }
+            >
+              <Image
+                source={
+                  {
+                    "testUri": "../../../src/assets/images/filter.png",
+                  }
+                }
+                style={
+                  {
+                    "height": 30,
+                    "resizeMode": "contain",
+                    "width": 30,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "fontSize": 24,
+              "fontWeight": 600,
+            }
+          }
+        >
+          No results found!
+        </Text>
+      </View>
+    </RCTScrollView>
+  </View>
+  <Modal
+    animationType="slide"
+    hardwareAccelerated={false}
+    transparent={true}
+    visible={false}
+  />
+</View>
+`;
