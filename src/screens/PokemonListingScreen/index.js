@@ -1,7 +1,12 @@
 import {useState, useEffect, useContext} from 'react';
 import {View, Text, FlatList, Pressable} from 'react-native';
 
-import {Card, PokemonListHeader, Filters} from '../../components';
+import {
+  Card,
+  PokemonListHeader,
+  PokemonEmptyList,
+  Filters,
+} from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL, SCREEN_NAMES, POKEMON_COLORS} from '../../constants';
@@ -69,6 +74,7 @@ export const PokemonListingScreen = ({navigation}) => {
               </Pressable>
             );
           }}
+          ListEmptyComponent={PokemonEmptyList}
           ListHeaderComponent={PokemonListHeader}
           numColumns={2}
           columnWrapperStyle={styles.cardColumnWrapperStyle}

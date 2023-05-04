@@ -52,6 +52,7 @@ export const PokemonProvider = ({children}) => {
       });
     } catch (error) {
       console.log(error);
+      setPokemons([]);
       setError('Something went wrong...');
     } finally {
       setLoading(false);
@@ -131,8 +132,9 @@ export const PokemonProvider = ({children}) => {
 
         setPokemons([listItem]);
       } catch (error) {
-        console.log(error);
-        setError('Something went wrong...');
+        error.response.status === 404
+          ? setPokemons([])
+          : setError('Something went wrong...');
       } finally {
         setLoading(false);
       }

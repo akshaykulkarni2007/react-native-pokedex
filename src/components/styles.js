@@ -147,3 +147,10 @@ export const pokemonListHeaderStyles = StyleSheet.create({
     marginVertical: 8,
   },
 });
+
+export const pokemonEmptyListStyles = StyleSheet.create({
+  text: {
+    fontSize: 24,
+    fontWeight: 600,
+  },
+});
