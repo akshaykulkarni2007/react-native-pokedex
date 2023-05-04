@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
-import {View, Text, FlatList, Pressable, TextInput, Image} from 'react-native';
+import {View, Text, FlatList, Pressable} from 'react-native';
 
-import {Card, Filters} from '../../components';
+import {Card, PokemonListHeader, Filters} from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL, SCREEN_NAMES, POKEMON_COLORS} from '../../constants';
@@ -9,12 +9,11 @@ import {API_BASE_URL, SCREEN_NAMES, POKEMON_COLORS} from '../../constants';
 import styles from './styles';
 
 export const PokemonListingScreen = ({navigation}) => {
-  const {pokemons, fetchPokemons, nextURL, error, getAlltyps, filterPokemons} =
+  const {pokemons, fetchPokemons, nextURL, error, getAlltyps} =
     useContext(PokemonContext);
 
   const [hasScrolled, setHasScrolled] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchInitalData();
@@ -34,37 +33,6 @@ export const PokemonListingScreen = ({navigation}) => {
       fetchPokemons(nextURL);
     }
   };
-
-  const ListHeader = () => (
-    <>
-      <Text style={styles.title}>Pokedex</Text>
-      <Text style={styles.subtitle}>
-        Search for any pokemon that exists on the planet
-      </Text>
-
-      <View style={styles.filterContainer}>
-        <TextInput
-          placeholder="Name or Number"
-          style={styles.searchInput}
-          value={searchTerm}
-          onChangeText={val => setSearchTerm(val)}
-          returnKeyType="search"
-          onSubmitEditing={() => {
-            filterPokemons(`${API_BASE_URL}pokemon`, searchTerm);
-          }}
-        />
-
-        <Pressable
-          style={styles.filterButton}
-          onPress={() => setShowFilters(true)}>
-          <Image
-            source={require('../../assets/images/filter.png')}
-            style={styles.filterIcon}
-          />
-        </Pressable>
-      </View>
-    </>
-  );
 
   if (error) {
     return <Text>{error}</Text>;
@@ -101,7 +69,7 @@ export const PokemonListingScreen = ({navigation}) => {
               </Pressable>
             );
           }}
-          ListHeaderComponent={ListHeader}
+          ListHeaderComponent={PokemonListHeader}
           numColumns={2}
           columnWrapperStyle={styles.cardColumnWrapperStyle}
           onEndReached={handleLoadMore}

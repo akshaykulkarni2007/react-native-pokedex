@@ -5,6 +5,15 @@ import {API_BASE_URL} from '../constants';
 
 export const PokemonContext = createContext();
 
+const pokemonListItem = ({id, name, sprites, types}) => {
+  return {
+    id,
+    name,
+    imageUrl: sprites.front_default,
+    types: types.map(type => type.type.name.toUpperCase()),
+  };
+};
+
 export const PokemonProvider = ({children}) => {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState({
@@ -37,15 +46,9 @@ export const PokemonProvider = ({children}) => {
       pokemonList.results.forEach(async item => {
         const {data: details} = await axios.get(item.url);
 
-        setPokemons(prev => [
-          ...prev,
-          {
-            id: details.id,
-            name: details.name,
-            imageUrl: details.sprites.front_default,
-            types: details.types.map(type => type.type.name.toUpperCase()),
-          },
-        ]);
+        const listItem = pokemonListItem(details);
+
+        setPokemons(prev => [...prev, listItem]);
       });
     } catch (error) {
       console.log(error);
@@ -117,22 +120,22 @@ export const PokemonProvider = ({children}) => {
   };
 
   const filterPokemons = async (url, query) => {
-    try {
-      setLoading(true);
-      const {data: result} = await axios.get(`${url}/${query}`);
-      setPokemons([
-        {
-          id: result.id,
-          name: result.name,
-          imageUrl: result.sprites.front_default,
-          types: result.types.map(type => type.type.name.toUpperCase()),
-        },
-      ]);
-    } catch (error) {
-      console.log(error);
-      setError('Something went wrong...');
-    } finally {
-      setLoading(false);
+    if (query.trim().length === 0) {
+      fetchPokemons(`${API_BASE_URL}pokemon`);
+    } else {
+      try {
+        setLoading(true);
+        const {data: result} = await axios.get(`${url}/${query}`);
+
+        const listItem = pokemonListItem(result);
+
+        setPokemons([listItem]);
+      } catch (error) {
+        console.log(error);
+        setError('Something went wrong...');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

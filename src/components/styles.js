@@ -109,3 +109,41 @@ export const filtersStyles = StyleSheet.create({
     flexGrow: 1,
   },
 });
+
+export const pokemonListHeaderStyles = StyleSheet.create({
+  filterContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    marginVertical: 8,
+  },
+  searchInput: {
+    flexGrow: 1,
+    backgroundColor: COLORS.GRAY,
+    paddingHorizontal: 8,
+    borderRadius: 16,
+  },
+  filterButton: {
+    backgroundColor: COLORS.DARK,
+    padding: 16,
+    borderRadius: 16,
+  },
+  filterIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain',
+  },
+  title: {
+    color: COLORS.DARK,
+    fontSize: 32,
+    fontWeight: 'bold',
+    letterSpacing: 2,
+    marginTop: 16,
+    paddingBottom: 8,
+    borderBottomColor: COLORS.DARK,
+    borderBottomWidth: 1,
+  },
+  subtitle: {
+    fontSize: 18,
+    marginVertical: 8,
+  },
+});
