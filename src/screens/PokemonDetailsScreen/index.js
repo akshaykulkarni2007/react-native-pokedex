@@ -9,14 +9,23 @@ import {API_BASE_URL} from '../../constants';
 import {styles} from './styles';
 
 export const PokemonDetailsScreen = ({route}) => {
-  const {pokemonDetails, totalCount, loading, error, fetchPokemonDetails} =
-    useContext(PokemonContext);
+  const {
+    pokemons,
+    pokemonDetails,
+    totalCount,
+    loading,
+    error,
+    fetchPokemonDetails,
+  } = useContext(PokemonContext);
 
   const [pokemonId, setPokemonId] = useState(route.params.id);
 
   useEffect(() => {
     fetchPokemonDetails(`${API_BASE_URL}pokemon/${pokemonId}`);
   }, [pokemonId]);
+
+  const nextName = pokemons.find(p => p.id === pokemonId + 1)?.name;
+  const prevName = pokemons.find(p => p.id === pokemonId - 1)?.name;
 
   if (loading) {
     return <Spinner />;
@@ -66,7 +75,7 @@ export const PokemonDetailsScreen = ({route}) => {
               type="dark"
               handlePress={() => setPokemonId(prev => (prev -= 1))}
               style={styles.button}>
-              <Text>Previous</Text>
+              <Text>{prevName}</Text>
             </Button>
           )}
 
@@ -75,7 +84,7 @@ export const PokemonDetailsScreen = ({route}) => {
               type="dark"
               handlePress={() => setPokemonId(prev => (prev += 1))}
               style={styles.button}>
-              <Text>Next</Text>
+              <Text>{nextName}</Text>
             </Button>
           )}
         </View>
