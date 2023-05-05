@@ -31,7 +31,6 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
       onEndReached={[Function]}
-      onEndThreshold={50}
       onLayout={[Function]}
       onMomentumScrollBegin={[Function]}
       onMomentumScrollEnd={[Function]}
@@ -147,6 +146,7 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
                 />
               </View>
               <TextInput
+                autoCapitalize="none"
                 onChangeText={[Function]}
                 onSubmitEditing={[Function]}
                 placeholder="Name or Number"

@@ -200,6 +200,7 @@ exports[`renders components correctly renders PokemonListHeader correctly 1`] = 
         />
       </View>
       <TextInput
+        autoCapitalize="none"
         onChangeText={[Function]}
         onSubmitEditing={[Function]}
         placeholder="Name or Number"

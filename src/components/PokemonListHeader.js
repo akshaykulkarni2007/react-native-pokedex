@@ -30,12 +30,14 @@ export const PokemonListHeader = ({setShowFilters}) => {
               style={pokemonListHeaderStyles.searchIcon}
             />
           </Pressable>
+
           <TextInput
             placeholder="Name or Number"
             style={pokemonListHeaderStyles.searchInput}
             value={searchTerm}
             onChangeText={val => setSearchTerm(val)}
             returnKeyType="search"
+            autoCapitalize="none"
             onSubmitEditing={() => {
               searchPokemons(`${API_BASE_URL}pokemon`, searchTerm);
             }}

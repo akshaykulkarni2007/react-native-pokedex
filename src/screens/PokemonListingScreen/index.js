@@ -87,7 +87,6 @@ export const PokemonListingScreen = ({navigation}) => {
           columnWrapperStyle={styles.cardColumnWrapperStyle}
           onEndReached={handleLoadMore}
           onScroll={() => setHasScrolled(true)}
-          onEndThreshold={50}
         />
       </View>
 
