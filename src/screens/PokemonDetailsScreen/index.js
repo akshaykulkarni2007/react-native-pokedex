@@ -13,6 +13,7 @@ export const PokemonDetailsScreen = ({route}) => {
     pokemons,
     pokemonDetails,
     totalCount,
+    isFilteredResult,
     loading,
     error,
     fetchPokemonDetails,
@@ -70,7 +71,7 @@ export const PokemonDetailsScreen = ({route}) => {
         </Text>
 
         <View style={styles.actionBar}>
-          {pokemonId > 1 && (
+          {pokemonId > 1 && !isFilteredResult && (
             <Button
               type="dark"
               handlePress={() => setPokemonId(prev => (prev -= 1))}
@@ -79,7 +80,7 @@ export const PokemonDetailsScreen = ({route}) => {
             </Button>
           )}
 
-          {pokemonId < totalCount && (
+          {pokemonId < totalCount && !isFilteredResult && (
             <Button
               type="dark"
               handlePress={() => setPokemonId(prev => (prev += 1))}

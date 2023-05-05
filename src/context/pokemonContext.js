@@ -28,6 +28,7 @@ export const PokemonProvider = ({children}) => {
   const [types, setTypes] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedGenders, setSelectedGenders] = useState([]);
+  const [isFilteredResult, setIsFilteredResult] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
   const [nextURL, setNextURL] = useState('');
   const [loading, setLoading] = useState(false);
@@ -53,6 +54,7 @@ export const PokemonProvider = ({children}) => {
         const listItem = pokemonListItem(details);
 
         setPokemons(prev => [...prev, listItem]);
+        setIsFilteredResult(false);
       });
     } catch (error) {
       console.log(error);
@@ -139,6 +141,7 @@ export const PokemonProvider = ({children}) => {
         const listItem = pokemonListItem(result);
 
         setPokemons([listItem]);
+        setIsFilteredResult(true);
       } catch (error) {
         error.response.status === 404
           ? setPokemons([])
@@ -183,7 +186,9 @@ export const PokemonProvider = ({children}) => {
 
             result.push(listItem);
           });
+
           setPokemons(result);
+          setIsFilteredResult(true);
         });
       } catch (error) {
         console.log(error);
@@ -217,6 +222,7 @@ export const PokemonProvider = ({children}) => {
         pokemonDetails,
         selectedTypes,
         selectedGenders,
+        isFilteredResult,
         totalCount,
         types,
         nextURL,

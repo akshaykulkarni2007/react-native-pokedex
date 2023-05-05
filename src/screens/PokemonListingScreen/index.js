@@ -6,6 +6,7 @@ import {
   PokemonListHeader,
   PokemonEmptyList,
   Filters,
+  Spinner,
 } from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
@@ -14,7 +15,7 @@ import {API_BASE_URL, SCREEN_NAMES, POKEMON_COLORS} from '../../constants';
 import styles from './styles';
 
 export const PokemonListingScreen = ({navigation}) => {
-  const {pokemons, fetchPokemons, nextURL, error, getAlltyps} =
+  const {pokemons, fetchPokemons, nextURL, loading, error, getAlltyps} =
     useContext(PokemonContext);
 
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -38,6 +39,10 @@ export const PokemonListingScreen = ({navigation}) => {
       fetchPokemons(nextURL);
     }
   };
+
+  if (!pokemons.length && loading) {
+    return <Spinner />;
+  }
 
   if (error) {
     return <Text>{error}</Text>;
