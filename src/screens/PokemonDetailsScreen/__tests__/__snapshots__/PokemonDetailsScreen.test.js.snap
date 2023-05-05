@@ -28,14 +28,36 @@ exports[`renders PokemonDetailsScreen correctly renders screen correctly 1`] = `
           }
         }
       />
-      <Text
+      <View
         style={
           {
-            "color": "#2e3156",
-            "fontSize": 20,
+            "flexDirection": "row",
+            "gap": 10,
+            "justifyContent": "space-between",
           }
         }
-      />
+      >
+        <View
+          style={
+            {
+              "borderColor": "#2e3156",
+              "borderRadius": 8,
+              "borderStyle": "dashed",
+              "borderWidth": 1,
+            }
+          }
+        />
+        <Text
+          style={
+            {
+              "color": "#2e3156",
+              "flex": 1,
+              "flexWrap": "wrap",
+              "fontSize": 18,
+            }
+          }
+        />
+      </View>
       <Text
         style={
           {

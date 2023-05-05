@@ -10,8 +10,19 @@ export const styles = StyleSheet.create({
     maxWidth: '90%',
     marginLeft: '5%',
   },
+  topSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 10,
+  },
+  imageContainer: {
+    borderColor: COLORS.DARK,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: 'dashed',
+  },
   image: {
-    width: '100%',
+    width: 200,
     height: 300,
     resizeMode: 'contain',
   },
@@ -24,7 +35,9 @@ export const styles = StyleSheet.create({
   },
   description: {
     color: COLORS.DARK,
-    fontSize: 20,
+    fontSize: 18,
+    flex: 1,
+    flexWrap: 'wrap',
   },
   label: {
     fontWeight: 'bold',

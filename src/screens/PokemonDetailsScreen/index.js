@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react';
-import {View, ScrollView, Text, Image, Pressable} from 'react-native';
+import {View, ScrollView, Text, Image} from 'react-native';
 
 import {Spinner, Button} from '../../components';
 
@@ -41,11 +41,18 @@ export const PokemonDetailsScreen = ({route}) => {
       <View style={styles.details}>
         <Text style={styles.title}>{pokemonDetails.name}</Text>
 
-        {pokemonDetails.imageUrl && (
-          <Image source={{uri: pokemonDetails.imageUrl}} style={styles.image} />
-        )}
+        <View style={styles.topSection}>
+          <View style={styles.imageContainer}>
+            {pokemonDetails.imageUrl && (
+              <Image
+                source={{uri: pokemonDetails.imageUrl}}
+                style={styles.image}
+              />
+            )}
+          </View>
 
-        <Text style={styles.description}>{pokemonDetails.description}</Text>
+          <Text style={styles.description}>{pokemonDetails.description}</Text>
+        </View>
 
         <Text style={styles.sectionTitle}>Physical Attributes</Text>
         {Object.entries(pokemonDetails.attributes).map(([key, value]) => (
