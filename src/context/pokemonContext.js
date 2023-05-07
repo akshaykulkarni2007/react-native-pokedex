@@ -38,8 +38,6 @@ export const PokemonProvider = ({children}) => {
 
   useEffect(() => {
     const populateData = async () => {
-      const filteredPokemons = [[], []];
-
       try {
         setLoading(true);
         setPokemons([]);
@@ -88,7 +86,10 @@ export const PokemonProvider = ({children}) => {
         setLoading(false);
       }
     };
-    if (isFilteredResult) populateData();
+
+    if (isFilteredResult) {
+      populateData();
+    }
   }, [JSON.stringify(selectedGenders), JSON.stringify(selectedTypes)]);
 
   const fetchPokemons = async (url, limit = 12) => {
@@ -133,8 +134,14 @@ export const PokemonProvider = ({children}) => {
         speciesData.evolution_chain.url,
       );
 
-      const {data: weaknesses} = await axios.get(
-        `${pokemonDetails.types[0].type.url}`,
+      const allWeaknesses = await Promise.all(
+        pokemonDetails.types.map(async t => {
+          const typeUrl = t.type.url;
+          const {data} = await axios.get(typeUrl);
+          return get(data, 'damage_relations.double_damage_from', []).map(
+            detail => detail.name,
+          );
+        }),
       );
 
       let evoData = evolutionChain.chain;
@@ -161,9 +168,7 @@ export const PokemonProvider = ({children}) => {
             ability => ability.ability.name,
           ),
           types: pokemonDetails.types.map(type => type.type.name),
-          'weak against': weaknesses.damage_relations.double_damage_from.map(
-            type => type.name,
-          ),
+          'weak against': unionBy(...allWeaknesses).join(', '),
         },
         stats: pokemonDetails.stats.map(stat => ({
           name: stat.stat.name.replace('-', ' '),
@@ -225,12 +230,12 @@ export const PokemonProvider = ({children}) => {
 
       return (
         await Promise.all(
-          unique.map(async (p, i) => {
+          unique.map(async p => {
             const {name} = get(p, extractor);
 
             const result = await axios
               .get(`${API_BASE_URL}pokemon/${name}`)
-              .catch(e => null);
+              .catch(() => null);
 
             return result == null ? null : pokemonListItem(result.data);
           }),

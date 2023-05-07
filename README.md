@@ -106,6 +106,7 @@ The context provides following properties:
 - `selectedTypes`: Pokemon types selected for filters
 - `selectedGenders`: Pokemon genders selected for filters
 - `isFilteredResult`: Mark if list is of filtered items
+- `searchTerm`: Search query for Pokemon
 - `totalCount`: Total number of Pokemons recieved from the API
 - `types`: List of all types of Pokemons
 - `nextURL`: next URL to use to get next items in the list
@@ -150,6 +151,18 @@ fetchPokemonDetails: (url: string) => void
 searchPokemons: (url: string, query: string) => void
 ```
 
+- `getPokemonsByFilter`: Trigger Pokemon filtering with selected gender and/or type
+
+```ts
+getPokemonsByFilter: (filters: string ,filterPath: string, baseExtractor: string, extractor: string) => void
+```
+
+- `setSearchTerm`: Set the search query
+
+```ts
+setSearchTerm: (query: string) => void
+```
+
 In addition, context also has a method `getPokemonsByTypes` which is called when `selectedTypes` is changed. It fetches Pokemons of selected types and sets the `pokemons` state.
 
 ```ts
@@ -171,7 +184,6 @@ getPokemonsByTypes: () => void
 
 ---
 
-- Implement filter by gender. Add `AND` conjunction with other filters
 - More functional testing
 - More intuitive UI
 - Move parts of components into more concise components
