@@ -51,41 +51,34 @@ export const PokemonProvider = ({children}) => {
         ) {
           fetchPokemons(`${API_BASE_URL}pokemon`);
         } else {
+          let pokemonsByType = [];
+          let pokemonByGenders = [];
           if (selectedTypes.length) {
-            const pokemonsByType = await getPokemonsByFilter(
+            pokemonsByType = await getPokemonsByFilter(
               selectedTypes,
               'type',
               'pokemon',
               'pokemon',
-              'pokemon.name',
             );
-            filteredPokemons[0] = pokemonsByType;
           }
 
           if (selectedGenders.length) {
-            const pokemonByGenders = await getPokemonsByFilter(
+            pokemonByGenders = await getPokemonsByFilter(
               selectedGenders,
               'gender',
               'pokemon_species_details',
               'pokemon_species',
-              'pokemon_species.namer',
             );
-            filteredPokemons[1] = pokemonByGenders;
           }
 
-          if (!selectedTypes.length) {
-            setPokemons(filteredPokemons[1]);
-          } else if (!selectedGenders.length) {
-            setPokemons(filteredPokemons[0]);
-          } else {
-            const result = intersectionBy(
-              filteredPokemons[0],
-              filteredPokemons[1],
-              'name',
-            );
+          const result = intersectionBy(
+            pokemonsByType.length ? pokemonsByType : pokemonByGenders,
+            pokemonByGenders.length ? pokemonByGenders : pokemonsByType,
+            'name',
+          );
 
-            setPokemons(result);
-          }
+          setPokemons(result);
+          setNextURL('');
         }
       } catch (error) {
         console.log(error);
@@ -155,9 +148,10 @@ export const PokemonProvider = ({children}) => {
         id: pokemonDetails.id,
         name: pokemonDetails.name,
         imageUrl: pokemonDetails.sprites.front_default,
-        description: speciesData.flavor_text_entries
-          .filter(f => f.language.name === 'en')[0]
-          .flavor_text.replace(/\n/g, ' '),
+        description:
+          speciesData?.flavor_text_entries
+            .filter(f => f.language.name === 'en')[0]
+            ?.flavor_text?.replace(/\n/g, ' ') || '',
         attributes: {
           height: pokemonDetails.height,
           weight: pokemonDetails.weight,
@@ -216,7 +210,6 @@ export const PokemonProvider = ({children}) => {
     filterPath,
     baseExtractor,
     extractor,
-    unionKey,
   ) => {
     if (filters.length) {
       const pokemonByFilter = await Promise.all(
@@ -228,7 +221,7 @@ export const PokemonProvider = ({children}) => {
         }),
       );
 
-      const unique = unionBy(...pokemonByFilter, unionKey);
+      const unique = unionBy(...pokemonByFilter, `${extractor}.name`);
 
       return (
         await Promise.all(
