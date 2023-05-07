@@ -8,9 +8,9 @@ import {API_BASE_URL} from '../constants';
 import {pokemonListHeaderStyles} from './styles';
 
 export const PokemonListHeader = ({setShowFilters}) => {
-  const {searchPokemons} = useContext(PokemonContext);
+  const {searchPokemons, searchTerm, setSearchTerm} =
+    useContext(PokemonContext);
 
-  const [searchTerm, setSearchTerm] = useState('');
   return (
     <>
       <Text style={pokemonListHeaderStyles.title}>Pokedex</Text>

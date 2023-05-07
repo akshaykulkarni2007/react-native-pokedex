@@ -40,10 +40,6 @@ export const PokemonListingScreen = ({navigation}) => {
     }
   };
 
-  // if (!pokemons.length && loading) {
-  //   return <Spinner />;
-  // }
-
   if (error) {
     return <Text>{error}</Text>;
   }

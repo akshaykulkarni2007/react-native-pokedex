@@ -1,6 +1,6 @@
 import React, {createContext, useState, useEffect} from 'react';
 import axios from 'axios';
-import {unionBy, intersectionBy} from 'lodash';
+import {get, unionBy, intersectionBy} from 'lodash';
 
 import {API_BASE_URL} from '../constants';
 
@@ -30,6 +30,7 @@ export const PokemonProvider = ({children}) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedGenders, setSelectedGenders] = useState([]);
   const [isFilteredResult, setIsFilteredResult] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const [totalCount, setTotalCount] = useState(0);
   const [nextURL, setNextURL] = useState('');
   const [loading, setLoading] = useState(false);
@@ -51,12 +52,24 @@ export const PokemonProvider = ({children}) => {
           fetchPokemons(`${API_BASE_URL}pokemon`);
         } else {
           if (selectedTypes.length) {
-            const pokemonsByType = await getPokemonsByTypes();
+            const pokemonsByType = await getPokemonsByFilter(
+              selectedTypes,
+              'type',
+              'pokemon',
+              'pokemon',
+              'pokemon.name',
+            );
             filteredPokemons[0] = pokemonsByType;
           }
 
           if (selectedGenders.length) {
-            const pokemonByGenders = await getPokemonsByGenders();
+            const pokemonByGenders = await getPokemonsByFilter(
+              selectedGenders,
+              'gender',
+              'pokemon_species_details',
+              'pokemon_species',
+              'pokemon_species.namer',
+            );
             filteredPokemons[1] = pokemonByGenders;
           }
 
@@ -83,11 +96,7 @@ export const PokemonProvider = ({children}) => {
       }
     };
     if (isFilteredResult) populateData();
-  }, [
-    JSON.stringify(selectedGenders),
-    JSON.stringify(selectedTypes),
-    isFilteredResult,
-  ]);
+  }, [JSON.stringify(selectedGenders), JSON.stringify(selectedTypes)]);
 
   const fetchPokemons = async (url, limit = 12) => {
     try {
@@ -132,7 +141,7 @@ export const PokemonProvider = ({children}) => {
       );
 
       const {data: weaknesses} = await axios.get(
-        `${API_BASE_URL}type/${pokemonDetails.id}`,
+        `${pokemonDetails.types[0].type.url}`,
       );
 
       let evoData = evolutionChain.chain;
@@ -176,8 +185,8 @@ export const PokemonProvider = ({children}) => {
     }
   };
 
-  const searchPokemons = async (url, query) => {
-    if (query.trim().length === 0) {
+  const searchPokemons = async url => {
+    if (searchTerm.trim().length === 0) {
       setPokemons([]);
       fetchPokemons(`${API_BASE_URL}pokemon`);
     } else {
@@ -186,7 +195,7 @@ export const PokemonProvider = ({children}) => {
         setPokemons([]);
         setNextURL('');
 
-        const {data: result} = await axios.get(`${url}/${query}`);
+        const {data: result} = await axios.get(`${url}/${searchTerm}`);
 
         const listItem = pokemonListItem(result);
 
@@ -202,49 +211,30 @@ export const PokemonProvider = ({children}) => {
     }
   };
 
-  const getPokemonsByTypes = async () => {
-    if (selectedTypes) {
-      const pokemonByTypes = await Promise.all(
-        selectedTypes.map(async type => {
-          const {data} = await axios.get(`${API_BASE_URL}type/${type}`);
-          return data.pokemon;
-        }),
-      );
-
-      const unique = unionBy(...pokemonByTypes, 'pokemon.name');
-
-      return await Promise.all(
-        unique.map(async (p, i) => {
-          const {name} = p.pokemon;
-
-          const {data: details} = await axios.get(
-            `${API_BASE_URL}pokemon/${name}`,
+  const getPokemonsByFilter = async (
+    filters,
+    filterPath,
+    baseExtractor,
+    extractor,
+    unionKey,
+  ) => {
+    if (filters.length) {
+      const pokemonByFilter = await Promise.all(
+        filters.map(async filter => {
+          const {data} = await axios.get(
+            `${API_BASE_URL}${filterPath}/${filter}`,
           );
-
-          return pokemonListItem(details);
-        }),
-      );
-    } else {
-      return [];
-    }
-  };
-
-  const getPokemonsByGenders = async () => {
-    if (selectedGenders.length) {
-      const pokemonsByGenders = await Promise.all(
-        selectedGenders.map(async gender => {
-          const {data} = await axios.get(`${API_BASE_URL}gender/${gender}`);
-
-          return data.pokemon_species_details;
+          return get(data, baseExtractor);
         }),
       );
 
-      const unique = unionBy(...pokemonsByGenders, 'pokemon_species.name');
+      const unique = unionBy(...pokemonByFilter, unionKey);
 
       return (
         await Promise.all(
           unique.map(async (p, i) => {
-            const {name} = p.pokemon_species;
+            const {name} = get(p, extractor);
+
             const result = await axios
               .get(`${API_BASE_URL}pokemon/${name}`)
               .catch(e => null);
@@ -253,8 +243,9 @@ export const PokemonProvider = ({children}) => {
           }),
         )
       ).filter(x => x !== null);
+    } else {
+      return [];
     }
-    return [];
   };
 
   const getAlltyps = async () => {
@@ -276,6 +267,7 @@ export const PokemonProvider = ({children}) => {
         pokemonDetails,
         selectedTypes,
         selectedGenders,
+        searchTerm,
         isFilteredResult,
         totalCount,
         types,
@@ -291,6 +283,7 @@ export const PokemonProvider = ({children}) => {
           setIsFilteredResult(true);
           setSelectedGenders(genders);
         },
+        setSearchTerm,
         fetchPokemons,
         fetchPokemonDetails,
         searchPokemons,
