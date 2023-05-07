@@ -40,9 +40,9 @@ export const PokemonListingScreen = ({navigation}) => {
     }
   };
 
-  if (!pokemons.length && loading) {
-    return <Spinner />;
-  }
+  // if (!pokemons.length && loading) {
+  //   return <Spinner />;
+  // }
 
   if (error) {
     return <Text>{error}</Text>;
@@ -55,9 +55,9 @@ export const PokemonListingScreen = ({navigation}) => {
           data={pokemons}
           keyExtractor={item => item.id}
           renderItem={({item}) => {
-            const gradient = item.types.map(type => POKEMON_COLORS[type]);
+            const gradient = item?.types?.map(type => POKEMON_COLORS[type]);
 
-            if (gradient.length === 1) {
+            if (gradient?.length === 1) {
               gradient.push(gradient[0]);
             }
 
@@ -79,9 +79,13 @@ export const PokemonListingScreen = ({navigation}) => {
               </Pressable>
             );
           }}
-          ListEmptyComponent={PokemonEmptyList}
+          ListEmptyComponent={!loading && <PokemonEmptyList />}
           ListHeaderComponent={
-            <PokemonListHeader setShowFilters={setShowFilters} />
+            !pokemons.length && loading ? (
+              <Spinner />
+            ) : (
+              <PokemonListHeader setShowFilters={setShowFilters} />
+            )
           }
           numColumns={2}
           columnWrapperStyle={styles.cardColumnWrapperStyle}

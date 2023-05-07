@@ -19,7 +19,7 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
     }
   >
     <RCTScrollView
-      ListEmptyComponent={[Function]}
+      ListEmptyComponent={<PokemonEmptyList />}
       ListHeaderComponent={
         <PokemonListHeader
           setShowFilters={[Function]}
