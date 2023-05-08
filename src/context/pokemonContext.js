@@ -3,17 +3,9 @@ import axios from 'axios';
 import {get, unionBy, intersectionBy} from 'lodash';
 
 import {API_BASE_URL} from '../constants';
+import {getPokemonsByFilter, pokemonListItem} from './contextUtils';
 
 export const PokemonContext = createContext();
-
-const pokemonListItem = ({id, name, sprites, types}) => {
-  return {
-    id,
-    name,
-    imageUrl: sprites.front_default,
-    types: types.map(type => type.type.name.toUpperCase()),
-  };
-};
 
 export const PokemonProvider = ({children}) => {
   const [pokemons, setPokemons] = useState([]);
@@ -208,42 +200,6 @@ export const PokemonProvider = ({children}) => {
       } finally {
         setLoading(false);
       }
-    }
-  };
-
-  const getPokemonsByFilter = async (
-    filters,
-    filterPath,
-    baseExtractor,
-    extractor,
-  ) => {
-    if (filters.length) {
-      const pokemonByFilter = await Promise.all(
-        filters.map(async filter => {
-          const {data} = await axios.get(
-            `${API_BASE_URL}${filterPath}/${filter}`,
-          );
-          return get(data, baseExtractor);
-        }),
-      );
-
-      const unique = unionBy(...pokemonByFilter, `${extractor}.name`);
-
-      return (
-        await Promise.all(
-          unique.map(async p => {
-            const {name} = get(p, extractor);
-
-            const result = await axios
-              .get(`${API_BASE_URL}pokemon/${name}`)
-              .catch(() => null);
-
-            return result == null ? null : pokemonListItem(result.data);
-          }),
-        )
-      ).filter(x => x !== null);
-    } else {
-      return [];
     }
   };
 

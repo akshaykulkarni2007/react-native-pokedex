@@ -1,10 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import {render, screen, fireEvent} from '@testing-library/react-native';
 
 import {PokemonContext} from '../../context/pokemonContext';
-import {PokemonEmptyList, PokemonListHeader, Filters, Card} from '..';
-import CheckBox from '@react-native-community/checkbox';
+import {PokemonListHeader, Filters} from '..';
 
 describe('PokemonListHeader functional tests', () => {
   test('searches when search button is clicked', () => {
