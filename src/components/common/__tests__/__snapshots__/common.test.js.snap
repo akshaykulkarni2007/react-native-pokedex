@@ -136,6 +136,7 @@ exports[`renders common components correctly renders Spinner correctly 1`] = `
   <ActivityIndicator
     color="#CCC"
     size="large"
+    testID="spinner"
   />
 </View>
 `;

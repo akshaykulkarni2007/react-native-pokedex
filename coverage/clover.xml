@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683554729953" clover="3.2.0">
-  <project timestamp="1683554729953" name="All files">
-    <metrics statements="218" coveredstatements="168" conditionals="58" coveredconditionals="26" methods="70" coveredmethods="46" elements="346" coveredelements="240" complexity="0" loc="218" ncloc="218" packages="7" files="21" classes="21"/>
+<coverage generated="1683556144121" clover="3.2.0">
+  <project timestamp="1683556144121" name="All files">
+    <metrics statements="218" coveredstatements="173" conditionals="58" coveredconditionals="31" methods="70" coveredmethods="51" elements="346" coveredelements="255" complexity="0" loc="218" ncloc="218" packages="7" files="21" classes="21"/>
     <package name="src">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="constants.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/constants.js">
@@ -83,8 +83,8 @@
       <file name="Button.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/components/common/Button.js">
         <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="5" type="stmt"/>
-        <line num="6" count="17" type="cond" truecount="0" falsecount="1"/>
-        <line num="8" count="17" type="stmt"/>
+        <line num="6" count="19" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="19" type="stmt"/>
       </file>
       <file name="Checkbox.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/components/common/Checkbox.js">
         <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
@@ -96,7 +96,7 @@
       <file name="Spinner.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/components/common/Spinner.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="5" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
       </file>
       <file name="index.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/components/common/index.js">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -246,23 +246,23 @@
       </file>
     </package>
     <package name="src.screens.PokemonDetailsScreen">
-      <metrics statements="17" coveredstatements="10" conditionals="14" coveredconditionals="5" methods="10" coveredmethods="1"/>
+      <metrics statements="17" coveredstatements="15" conditionals="14" coveredconditionals="10" methods="10" coveredmethods="6"/>
       <file name="index.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/screens/PokemonDetailsScreen/index.js">
-        <metrics statements="16" coveredstatements="9" conditionals="14" coveredconditionals="5" methods="10" coveredmethods="1"/>
+        <metrics statements="16" coveredstatements="14" conditionals="14" coveredconditionals="10" methods="10" coveredmethods="6"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
+        <line num="29" count="8" type="stmt"/>
+        <line num="31" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="35" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
         <line num="84" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
       </file>

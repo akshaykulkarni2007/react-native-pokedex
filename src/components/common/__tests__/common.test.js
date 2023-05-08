@@ -29,11 +29,3 @@ describe('renders common components correctly', () => {
     expect(tree).toMatchSnapshot();
   });
 });
-
-// describe('component functionalities', () => {
-//   test('checkbox toggle', () => {
-//     const {getByPlaceholder, getByText, getAllByText} = renderer.create(
-//       <GroceryShoppingList />,
-//     );
-//   })
-// })

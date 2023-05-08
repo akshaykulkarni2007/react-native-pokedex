@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/20</span>
+                <span class='fraction'>16/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.71% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/14</span>
+                <span class='fraction'>10/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>6/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/16</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -184,28 +184,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,7 +221,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,7 +231,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -290,19 +290,19 @@ export const PokemonDetailsScreen = ({route}) =&gt; {
 &nbsp;
   const [pokemonId, setPokemonId] = useState(route.params.id);
 &nbsp;
-  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    fetchPokemonDetails(`${API_BASE_URL}pokemon/${pokemonId}`);</span>
+  useEffect(() =&gt; {
+    fetchPokemonDetails(`${API_BASE_URL}pokemon/${pokemonId}`);
   }, [pokemonId]);
 &nbsp;
-  const nextName = pokemons.find(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >p.id === pokemonId + 1)</span>?.name;
-  const prevName = pokemons.find(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >p.id === pokemonId - 1)</span>?.name;
+  const nextName = pokemons.find(p =&gt; p.id === pokemonId + 1)?.name;
+  const prevName = pokemons.find(p =&gt; p.id === pokemonId - 1)?.name;
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (loading) {
-<span class="cstat-no" title="statement not covered" >    return &lt;Spinner /&gt;;</span>
+  if (loading) {
+    return &lt;Spinner /&gt;;
   }
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (error) {
-<span class="cstat-no" title="statement not covered" >    return &lt;Text&gt;{error}&lt;/Text&gt;;</span>
+  if (error) {
+    return &lt;Text&gt;{error}&lt;/Text&gt;;
   }
 &nbsp;
   return (
@@ -324,16 +324,16 @@ export const PokemonDetailsScreen = ({route}) =&gt; {
         &lt;/View&gt;
 &nbsp;
         &lt;Text style={styles.sectionTitle}&gt;Physical Attributes&lt;/Text&gt;
-        {Object.entries(pokemonDetails.attributes).map(<span class="fstat-no" title="function not covered" >([</span>key, value]) =&gt; (
-<span class="cstat-no" title="statement not covered" >          &lt;Text style={styles.detailsRow} key={key}&gt;</span>
+        {Object.entries(pokemonDetails.attributes).map(([key, value]) =&gt; (
+          &lt;Text style={styles.detailsRow} key={key}&gt;
             &lt;Text style={styles.label}&gt;{key}: &lt;/Text&gt;
-            &lt;Text&gt;{Array.isArray(value) ? value.join(', ') : value}&lt;/Text&gt;
+            &lt;Text&gt;{Array.isArray(value) ? <span class="branch-0 cbranch-no" title="branch not covered" >value.join(', ') </span>: value}&lt;/Text&gt;
           &lt;/Text&gt;
         ))}
 &nbsp;
         &lt;Text style={styles.sectionTitle}&gt;Stats&lt;/Text&gt;
-        {pokemonDetails.stats.map(<span class="fstat-no" title="function not covered" >({</span>name, value}) =&gt; (
-<span class="cstat-no" title="statement not covered" >          &lt;Text style={styles.detailsRow} key={name}&gt;</span>
+        {pokemonDetails.stats.map(({name, value}) =&gt; (
+          &lt;Text style={styles.detailsRow} key={name}&gt;
             &lt;Text style={styles.label}&gt;{name}: &lt;/Text&gt;
             &lt;Text&gt;{value}&lt;/Text&gt;
           &lt;/Text&gt;
@@ -347,8 +347,8 @@ export const PokemonDetailsScreen = ({route}) =&gt; {
         &lt;/Text&gt;
 &nbsp;
         &lt;View style={styles.actionBar}&gt;
-          {pokemonId &gt; 1 &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!isFilteredResult </span>&amp;&amp; (
-<span class="branch-2 cbranch-no" title="branch not covered" >            &lt;Button</span>
+          {pokemonId &gt; 1 &amp;&amp; !isFilteredResult &amp;&amp; (
+            &lt;Button
               type="dark"
               handlePress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setPokemonId(<span class="fstat-no" title="function not covered" >pr</span>ev =&gt; (<span class="cstat-no" title="statement not covered" >prev -= 1)</span>)}</span>
               style={styles.button}&gt;
@@ -376,7 +376,7 @@ export const PokemonDetailsScreen = ({route}) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-08T14:05:29.880Z
+                at 2023-05-08T14:29:04.053Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

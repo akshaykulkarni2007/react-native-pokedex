@@ -6,6 +6,6 @@ import {spinnerStyles} from './styles';
 
 export const Spinner = () => (
   <View style={spinnerStyles.container}>
-    <ActivityIndicator size={'large'} color={COLORS.GRAY} />
+    <ActivityIndicator size={'large'} color={COLORS.GRAY} testID="spinner"/>
   </View>
 );
