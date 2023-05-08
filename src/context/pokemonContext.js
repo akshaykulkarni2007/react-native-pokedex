@@ -1,6 +1,7 @@
 import React, {createContext, useState, useEffect} from 'react';
-import axios from 'axios';
 import {get, unionBy, intersectionBy} from 'lodash';
+
+import {fetchByURL, fetchByPokemonsWithOptions} from './pokemonRepository';
 
 import {API_BASE_URL} from '../constants';
 import {getPokemonsByFilter, pokemonListItem} from './contextUtils';
@@ -85,18 +86,16 @@ export const PokemonProvider = ({children}) => {
     }
   }, [JSON.stringify(selectedGenders), JSON.stringify(selectedTypes)]);
 
-  const fetchPokemons = async (url, limit = 12) => {
+  const fetchPokemons = async url => {
     try {
       setLoading(true);
-      const {data: pokemonList} = await axios.get(url, {
-        params: {limit},
-      });
+      const {data: pokemonList} = await fetchByPokemonsWithOptions(url, 12);
 
       setNextURL(pokemonList.next);
       setTotalCount(pokemonList.count);
 
       pokemonList.results.forEach(async item => {
-        const {data: details} = await axios.get(item.url);
+        const {data: details} = await fetchByURL(item.url);
         const listItem = pokemonListItem(details);
 
         setPokemons(prev => [...prev, listItem]);
@@ -115,22 +114,22 @@ export const PokemonProvider = ({children}) => {
     try {
       setLoading(true);
 
-      const {data: pokemonDetails} = await axios.get(url);
+      const {data: pokemonDetails} = await fetchByURL(url);
 
-      const {data: speciesData} = await axios.get(
+      const {data: speciesData} = await fetchByURL(
         `${API_BASE_URL}pokemon-species/${pokemonDetails.id}`,
       );
 
-      const {data: genders} = await axios.get(`${API_BASE_URL}gender`);
+      const {data: genders} = await fetchByURL(`${API_BASE_URL}gender`);
 
-      const {data: evolutionChain} = await axios.get(
+      const {data: evolutionChain} = await fetchByURL(
         speciesData.evolution_chain.url,
       );
 
       const allWeaknesses = await Promise.all(
         pokemonDetails.types.map(async t => {
           const typeUrl = t.type.url;
-          const {data} = await axios.get(typeUrl);
+          const {data} = await fetchByURL(typeUrl);
           return get(data, 'damage_relations.double_damage_from', []).map(
             detail => detail.name,
           );
@@ -187,7 +186,7 @@ export const PokemonProvider = ({children}) => {
         setPokemons([]);
         setNextURL('');
 
-        const {data: result} = await axios.get(`${url}/${searchTerm}`);
+        const {data: result} = await fetchByURL(`${url}/${searchTerm}`);
 
         const listItem = pokemonListItem(result);
 
@@ -205,7 +204,7 @@ export const PokemonProvider = ({children}) => {
 
   const getAlltyps = async () => {
     try {
-      const {data} = await axios.get(`${API_BASE_URL}type`);
+      const {data} = await fetchByURL(`${API_BASE_URL}type`);
 
       const types = data.results.map(type => type.name);
       setTypes(types);

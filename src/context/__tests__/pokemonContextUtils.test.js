@@ -1,15 +1,26 @@
 import {pokemonListItem, getPokemonsByFilter} from '../contextUtils';
-import {fetchPokemonsByFilter} from '../pokemonRepository';
-import {expectedPokemonItem, pokemonResponse, typeFilters} from './fakes';
+import {fetchPokemonDetails, fetchPokemonsByFilter} from '../pokemonRepository';
+import {
+  mockPokemonItem,
+  pokemonResponse,
+  typeFilters,
+  mockTypeReponse,
+  mockPokemonResponse,
+} from './fakes';
 jest.mock('../pokemonRepository', () => ({
-  fetchPokemonsByFilter: jest.fn(() => ({data: {}})),
+  fetchPokemonsByFilter: jest.fn(() => ({data: mockTypeReponse})),
+  fetchPokemonDetails: jest.fn(() => ({data: mockPokemonResponse})),
 }));
 
 describe('Pokemon Context Utils Tests', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('pokemonListItem converts pokemon to list item', () => {
     const actual = pokemonListItem(pokemonResponse);
 
-    expect(actual).toEqual(expectedPokemonItem);
+    expect(actual).toEqual(mockPokemonItem);
   });
 
   test('getPokemonsByFilter returns empty when no filters', async () => {
@@ -25,6 +36,8 @@ describe('Pokemon Context Utils Tests', () => {
       'pokemon',
     );
 
-    expect(fetchPokemonsByFilter).toBeCalledTimes(2);
+    expect(fetchPokemonsByFilter).toBeCalledTimes(typeFilters.length);
+    expect(fetchPokemonDetails).toBeCalledTimes(filteredPokemons.length);
+    expect(filteredPokemons.length).toBe(mockTypeReponse.pokemon.length);
   });
 });
