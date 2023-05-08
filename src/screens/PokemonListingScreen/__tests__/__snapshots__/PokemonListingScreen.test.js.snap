@@ -160,7 +160,6 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
                     "paddingVertical": 20,
                   }
                 }
-                value=""
               />
             </View>
             <View

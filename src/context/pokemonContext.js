@@ -51,6 +51,7 @@ export const PokemonProvider = ({children}) => {
         } else {
           let pokemonsByType = [];
           let pokemonByGenders = [];
+
           if (selectedTypes.length) {
             pokemonsByType = await getPokemonsByFilter(
               selectedTypes,
