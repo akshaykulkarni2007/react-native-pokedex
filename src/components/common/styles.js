@@ -42,3 +42,11 @@ export const checkboxStyles = StyleSheet.create({
     flexGrow: 1,
   },
 });
+
+export const spinnerStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

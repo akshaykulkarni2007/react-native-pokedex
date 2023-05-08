@@ -29,7 +29,9 @@ export const Filters = props => {
         </View>
 
         <View style={filtersStyles.modalBody}>
-          <Text style={filtersStyles.filterTitle}>Type</Text>
+          <Text style={filtersStyles.filterTitle}>
+            Type ({checkedTypes.length} selected)
+          </Text>
 
           <FlatList
             data={types}
@@ -52,7 +54,9 @@ export const Filters = props => {
             style={filtersStyles.typesList}
           />
 
-          <Text style={filtersStyles.filterTitle}>Gender</Text>
+          <Text style={filtersStyles.filterTitle}>
+            Gender ({checkedGenders.length} selected)
+          </Text>
 
           <FlatList
             data={['male', 'female', 'genderless']}

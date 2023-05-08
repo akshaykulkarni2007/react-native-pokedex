@@ -123,8 +123,18 @@ exports[`renders common components correctly renders Checkbox correctly 1`] = `
 `;
 
 exports[`renders common components correctly renders Spinner correctly 1`] = `
-<ActivityIndicator
-  color="#CCC"
-  size="large"
-/>
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <ActivityIndicator
+    color="#CCC"
+    size="large"
+  />
+</View>
 `;
