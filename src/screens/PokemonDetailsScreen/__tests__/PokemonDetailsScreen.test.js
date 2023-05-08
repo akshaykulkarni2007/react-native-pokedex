@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {fireEvent, render, screen} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 
 import {PokemonContext} from '../../../context/pokemonContext';
 
@@ -87,8 +87,6 @@ describe('renders PokemonDetailsScreen correctly', () => {
     expect(nextButton).toBeTruthy();
     expect(prevButton).toBeTruthy();
   });
-
-  
 
   test('correctly renders attributes and stats', () => {
     const wrapper = render(

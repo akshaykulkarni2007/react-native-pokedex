@@ -28,4 +28,6 @@ describe('renders common components correctly', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  test('toggles checkbox correctly', () => {});
 });

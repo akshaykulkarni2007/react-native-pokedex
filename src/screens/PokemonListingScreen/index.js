@@ -65,7 +65,8 @@ export const PokemonListingScreen = ({navigation}) => {
                     name: item.name,
                   })
                 }
-                style={styles.navButton}>
+                style={styles.navButton}
+                testID={`card-${item.id}`}>
                 <Card
                   title={item.name}
                   image={item.imageUrl}
@@ -87,6 +88,7 @@ export const PokemonListingScreen = ({navigation}) => {
           columnWrapperStyle={styles.cardColumnWrapperStyle}
           onEndReached={handleLoadMore}
           onScroll={() => setHasScrolled(true)}
+          testID="pokemonlist"
         />
       </View>
 

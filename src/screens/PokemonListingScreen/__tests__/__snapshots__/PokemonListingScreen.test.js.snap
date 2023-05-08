@@ -41,6 +41,7 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
       renderItem={[Function]}
       scrollEventThrottle={50}
       stickyHeaderIndices={[]}
+      testID="pokemonlist"
       viewabilityConfigCallbackPairs={[]}
     >
       <View>
