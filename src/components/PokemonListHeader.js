@@ -28,6 +28,7 @@ export const PokemonListHeader = ({setShowFilters}) => {
             <Image
               source={require('../assets/images/search.png')}
               style={pokemonListHeaderStyles.searchIcon}
+              accessibilityLabel="search"
             />
           </Pressable>
 
@@ -50,6 +51,7 @@ export const PokemonListHeader = ({setShowFilters}) => {
           <Image
             source={require('../assets/images/filter.png')}
             style={pokemonListHeaderStyles.filterIcon}
+            accessibilityLabel="filter"
           />
         </Pressable>
       </View>

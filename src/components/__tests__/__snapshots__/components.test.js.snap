@@ -186,6 +186,7 @@ exports[`renders components correctly renders PokemonListHeader correctly 1`] = 
         }
       >
         <Image
+          accessibilityLabel="search"
           source={
             {
               "testUri": "../../../src/assets/images/search.png",
@@ -256,6 +257,7 @@ exports[`renders components correctly renders PokemonListHeader correctly 1`] = 
       }
     >
       <Image
+        accessibilityLabel="filter"
         source={
           {
             "testUri": "../../../src/assets/images/filter.png",

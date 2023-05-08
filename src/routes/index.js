@@ -23,7 +23,7 @@ export const Navigation = () => {
         <Stack.Screen
           name={SCREEN_NAMES.POKEMON_DETAILS}
           component={PokemonDetailsScreen}
-          options={({route}) => ({title: pokemonDetails?.name})}
+          options={() => ({title: pokemonDetails?.name})}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -132,6 +132,7 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
                 }
               >
                 <Image
+                  accessibilityLabel="search"
                   source={
                     {
                       "testUri": "../../../src/assets/images/search.png",
@@ -202,6 +203,7 @@ exports[`renders PokemonListingScreen correctly renders screen correctly 1`] = `
               }
             >
               <Image
+                accessibilityLabel="filter"
                 source={
                   {
                     "testUri": "../../../src/assets/images/filter.png",
