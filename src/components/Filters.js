@@ -37,12 +37,7 @@ export const Filters = props => {
             data={types}
             keyExtractor={item => item}
             renderItem={({item}) => (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={filtersStyles.checkboxList}>
                 <CustomCheckBox
                   label={item}
                   checked={checkedTypes}
@@ -62,12 +57,7 @@ export const Filters = props => {
             data={['male', 'female', 'genderless']}
             keyExtractor={item => item}
             renderItem={({item}) => (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <View style={filtersStyles.checkboxList}>
                 <CustomCheckBox
                   label={item}
                   checked={checkedGenders}
@@ -77,6 +67,7 @@ export const Filters = props => {
             )}
             numColumns={2}
             style={filtersStyles.genderList}
+            testID="gender-filters"
           />
         </View>
 

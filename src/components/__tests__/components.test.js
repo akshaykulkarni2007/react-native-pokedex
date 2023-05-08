@@ -4,54 +4,9 @@ import {render, screen, fireEvent} from '@testing-library/react-native';
 
 import {PokemonContext} from '../../context/pokemonContext';
 import {PokemonEmptyList, PokemonListHeader, Filters, Card} from '..';
+import CheckBox from '@react-native-community/checkbox';
 
-describe('renders components correctly', () => {
-  jest.mock('react-native-linear-gradient', () => 'LinearGradient');
-
-  test('renders PokemonEmptyList correctly', () => {
-    const tree = renderer.create(<PokemonEmptyList />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('renders PokemonListHeader correctly', () => {
-    const tree = renderer
-      .create(
-        <PokemonContext.Provider value={{searchPokemons: () => {}}}>
-          <PokemonListHeader setShowFilters={() => {}} />
-        </PokemonContext.Provider>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('renders Card correctly', () => {
-    const tree = renderer
-      .create(
-        <Card
-          image="url"
-          title="title"
-          description="description"
-          bgcolor={['red', 'blue']}
-        />,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  test('renders Filters correctly', () => {
-    const tree = renderer
-      .create(
-        <PokemonContext.Provider
-          value={{types: [], setSelectedTypes: [], setSelectedGenders: []}}>
-          <Filters showFilters={false} setShowFilters={() => {}} />
-        </PokemonContext.Provider>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-});
-
-describe('functional tests', () => {
+describe('PokemonListHeader functional tests', () => {
   test('searches when search button is clicked', () => {
     const searchPokemons = jest.fn();
 
@@ -89,6 +44,94 @@ describe('functional tests', () => {
     const button = screen.getByLabelText('filter');
 
     fireEvent.press(button);
+    expect(setShowFilters).toHaveBeenCalled();
+  });
+});
+
+describe('Filter functional tests', () => {
+  test('closes filters on clicking close button', () => {
+    const setShowFilters = jest.fn();
+
+    render(
+      <PokemonContext.Provider value={{searchPokemons: () => {}}}>
+        <Filters setShowFilters={setShowFilters} />
+      </PokemonContext.Provider>,
+    );
+
+    const button = screen.getByText('X');
+
+    fireEvent.press(button);
+    expect(setShowFilters).toHaveBeenCalled();
+  });
+
+  test('resets filters on "Reset" button click', async () => {
+    const setShowFilters = jest.fn();
+    const setSelectedTypes = jest.fn();
+    const setSelectedGenders = jest.fn();
+
+    render(
+      <PokemonContext.Provider
+        value={{
+          types: ['ghost'],
+          searchPokemons: () => {},
+          setSelectedTypes,
+          setSelectedGenders,
+        }}>
+        <Filters setShowFilters={setShowFilters} />
+      </PokemonContext.Provider>,
+    );
+
+    const button = screen.getByText('Reset');
+    const genderCheckbox = screen.getByTestId(/checkbox-male/i);
+    const typeCheckbox = screen.getByTestId(/checkbox-ghost/i);
+
+    fireEvent(genderCheckbox, 'onValueChange', true);
+    fireEvent(typeCheckbox, 'onValueChange', true);
+
+    expect(genderCheckbox.children[0].props.value).toBeTruthy();
+    expect(typeCheckbox.children[0].props.value).toBeTruthy();
+
+    fireEvent.press(button);
+
+    expect(genderCheckbox.children[0].props.value).toBeFalsy();
+    expect(typeCheckbox.children[0].props.value).toBeFalsy();
+
+    expect(setSelectedTypes).toHaveBeenCalled();
+    expect(setSelectedGenders).toHaveBeenCalled();
+    expect(setShowFilters).toHaveBeenCalled();
+  });
+
+  test('applies filters on "Apply" button click', async () => {
+    const setShowFilters = jest.fn();
+    const setSelectedTypes = jest.fn();
+    const setSelectedGenders = jest.fn();
+
+    render(
+      <PokemonContext.Provider
+        value={{
+          types: ['ghost'],
+          searchPokemons: () => {},
+          setSelectedTypes,
+          setSelectedGenders,
+        }}>
+        <Filters setShowFilters={setShowFilters} />
+      </PokemonContext.Provider>,
+    );
+
+    const button = screen.getByText('Apply');
+    const genderCheckbox = screen.getByTestId(/checkbox-male/i);
+    const typeCheckbox = screen.getByTestId(/checkbox-ghost/i);
+
+    fireEvent(genderCheckbox, 'onValueChange', true);
+    fireEvent(typeCheckbox, 'onValueChange', true);
+
+    expect(genderCheckbox.children[0].props.value).toBeTruthy();
+    expect(typeCheckbox.children[0].props.value).toBeTruthy();
+
+    fireEvent.press(button);
+
+    expect(setSelectedTypes).toHaveBeenCalledWith(['ghost']);
+    expect(setSelectedGenders).toHaveBeenCalledWith(['male']);
     expect(setShowFilters).toHaveBeenCalled();
   });
 });

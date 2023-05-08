@@ -15,6 +15,7 @@ export const CustomCheckBox = ({label, checked, setChecked}) => {
               : [...checked, label],
           )
         }
+        testID={`checkbox-${label}`}
         style={checkboxStyles.checkbox}
       />
       <Text style={checkboxStyles.label}>{label}</Text>

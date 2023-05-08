@@ -71,6 +71,11 @@ export const filtersStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 8,
   },
+  checkboxList: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   typesList: {
     maxHeight: 300,
     padding: 10,
