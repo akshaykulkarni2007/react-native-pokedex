@@ -188,14 +188,14 @@ getPokemonsByTypes: () => void
 All components are tested with snapshot testing for UI stability and reliability.
 Context and other functions have been tested with unit testing with jest, ract-native-testing-library.
 
-**Overall Coverage**: 83.91%
+**Overall Coverage**: 85.65%
 
 ### Coverage report
 
 ----------------------------------|---------|----------|---------|---------|----------------------------
 File | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s  
 ----------------------------------|---------|----------|---------|---------|----------------------------
-All files | 83.91 | 58.62 | 83.33 | 84.23 |  
+All files | 85.65 | 62.06 | 88.88 | 85.13 |  
  src | 100 | 100 | 100 | 100 |  
  constants.js | 100 | 100 | 100 | 100 |  
  src/assets/images | 100 | 100 | 100 | 100 |  
@@ -219,8 +219,8 @@ All files | 83.91 | 58.62 | 83.33 | 84.23 |
  contextUtils.js | 100 | 75 | 100 | 100 | 34  
  pokemonContext.js | 70.47 | 43.47 | 60 | 69.9 | 43,105-107,129-165,184-200
 pokemonRepository.js | 100 | 100 | 100 | 100 |  
- src/screens/PokemonDetailsScreen | 80.95 | 71.42 | 60 | 88.23 |  
- index.js | 80 | 71.42 | 60 | 87.5 | 84-93  
+ src/screens/PokemonDetailsScreen | 100 | 85.71 | 100 | 100 |  
+ index.js | 100 | 85.71 | 100 | 100 | 46-61  
  styles.js | 100 | 100 | 100 | 100 |  
  src/screens/PokemonListingScreen | 92 | 64.28 | 100 | 91.66 |  
  index.js | 92 | 64.28 | 100 | 91.66 | 39-40  

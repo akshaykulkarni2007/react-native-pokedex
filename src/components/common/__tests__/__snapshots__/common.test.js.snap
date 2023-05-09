@@ -48,7 +48,6 @@ exports[`renders common components correctly renders Button correctly 1`] = `
       undefined,
     ]
   }
-  testID="button-primary"
 >
   <Text
     style={
@@ -193,7 +192,6 @@ exports[`renders common components correctly renders ErrorComponent correctly 1`
         undefined,
       ]
     }
-    testID="button-primary"
   >
     <Text
       style={

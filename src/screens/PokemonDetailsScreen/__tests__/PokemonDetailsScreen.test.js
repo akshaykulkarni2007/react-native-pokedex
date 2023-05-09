@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {render, screen} from '@testing-library/react-native';
+import {render, screen, fireEvent} from '@testing-library/react-native';
 
 import {PokemonContext} from '../../../context/pokemonContext';
 
@@ -111,5 +111,49 @@ describe('renders PokemonDetailsScreen correctly', () => {
     expect(wrapper.findByText('name2')).toBeTruthy();
     expect(wrapper.findByText('value12')).toBeTruthy();
     expect(wrapper.findByText('value23')).toBeTruthy();
+  });
+
+  test('navigates with next button correctly', async () => {
+    render(
+      <PokemonContext.Provider
+        value={{
+          pokemons,
+          pokemonDetails: {attributes, stats, evolutionChain: []},
+          isFilteredResult: false,
+          totalCount: 3,
+          loading: false,
+          error: null,
+          fetchPokemonDetails: () => {},
+        }}>
+        <PokemonDetailsScreen route={{params: {id: 1}}} />,
+      </PokemonContext.Provider>,
+    );
+
+    const button = await screen.findByText('test2');
+
+    fireEvent(button, 'handlePress');
+    expect(await screen.findByText('test3')).toBeTruthy();
+  });
+
+  test('navigates with prev button correctly', async () => {
+    render(
+      <PokemonContext.Provider
+        value={{
+          pokemons,
+          pokemonDetails: {attributes, stats, evolutionChain: []},
+          isFilteredResult: false,
+          totalCount: 3,
+          loading: false,
+          error: null,
+          fetchPokemonDetails: () => {},
+        }}>
+        <PokemonDetailsScreen route={{params: {id: 3}}} />,
+      </PokemonContext.Provider>,
+    );
+
+    const button = await screen.findByText('test2');
+
+    fireEvent(button, 'handlePress');
+    expect(await screen.findByText('test1')).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1683609159322" clover="3.2.0">
-  <project timestamp="1683609159322" name="All files">
-    <metrics statements="222" coveredstatements="187" conditionals="58" coveredconditionals="34" methods="72" coveredmethods="60" elements="352" coveredelements="281" complexity="0" loc="222" ncloc="222" packages="7" files="22" classes="22"/>
+<coverage generated="1683610801650" clover="3.2.0">
+  <project timestamp="1683610801650" name="All files">
+    <metrics statements="222" coveredstatements="189" conditionals="58" coveredconditionals="36" methods="72" coveredmethods="64" elements="352" coveredelements="289" complexity="0" loc="222" ncloc="222" packages="7" files="22" classes="22"/>
     <package name="src">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="constants.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/constants.js">
@@ -83,8 +83,8 @@
       <file name="Button.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/components/common/Button.js">
         <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="5" type="stmt"/>
-        <line num="6" count="23" type="cond" truecount="0" falsecount="1"/>
-        <line num="8" count="23" type="stmt"/>
+        <line num="6" count="29" type="cond" truecount="0" falsecount="1"/>
+        <line num="8" count="29" type="stmt"/>
       </file>
       <file name="Checkbox.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/components/common/Checkbox.js">
         <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
@@ -253,25 +253,25 @@
       </file>
     </package>
     <package name="src.screens.PokemonDetailsScreen">
-      <metrics statements="17" coveredstatements="15" conditionals="14" coveredconditionals="10" methods="10" coveredmethods="6"/>
+      <metrics statements="17" coveredstatements="17" conditionals="14" coveredconditionals="12" methods="10" coveredmethods="10"/>
       <file name="index.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/screens/PokemonDetailsScreen/index.js">
-        <metrics statements="16" coveredstatements="14" conditionals="14" coveredconditionals="10" methods="10" coveredmethods="6"/>
+        <metrics statements="16" coveredstatements="16" conditionals="14" coveredconditionals="12" methods="10" coveredmethods="10"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="20" count="5" type="stmt"/>
-        <line num="22" count="5" type="stmt"/>
-        <line num="24" count="5" type="stmt"/>
-        <line num="25" count="5" type="stmt"/>
-        <line num="28" count="8" type="stmt"/>
-        <line num="29" count="5" type="stmt"/>
-        <line num="31" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="9" type="stmt"/>
+        <line num="22" count="9" type="stmt"/>
+        <line num="24" count="9" type="stmt"/>
+        <line num="25" count="9" type="stmt"/>
+        <line num="28" count="19" type="stmt"/>
+        <line num="29" count="12" type="stmt"/>
+        <line num="31" count="9" type="cond" truecount="2" falsecount="0"/>
         <line num="32" count="1" type="stmt"/>
-        <line num="35" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="36" count="1" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
-        <line num="59" count="2" type="stmt"/>
-        <line num="67" count="2" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
+        <line num="39" count="7" type="stmt"/>
+        <line num="59" count="10" type="stmt"/>
+        <line num="67" count="10" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
       </file>
       <file name="styles.js" path="/Users/akskulka3/ReactNativeTraining/PokemonCapstone/src/screens/PokemonDetailsScreen/styles.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

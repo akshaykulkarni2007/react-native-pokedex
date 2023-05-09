@@ -5,11 +5,11 @@ export const pokemons = [
   },
   {
     id: 2,
-    name: 'test1',
+    name: 'test2',
   },
   {
     id: 3,
-    name: 'test1',
+    name: 'test3',
   },
 ];
 

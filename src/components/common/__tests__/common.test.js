@@ -72,7 +72,7 @@ describe('renders common components correctly', () => {
 
     render(<ErrorComponent message="test" />);
 
-    const button = await screen.findByTestId('button-primary');
+    const button = await screen.findByText('Go to Home');
 
     fireEvent(button, 'handlePress');
     expect(NativeModules.DevSettings.reload).toBeCalled();
