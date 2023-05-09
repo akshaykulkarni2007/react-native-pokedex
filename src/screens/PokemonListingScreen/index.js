@@ -7,6 +7,7 @@ import {
   PokemonEmptyList,
   Filters,
   Spinner,
+  ErrorComponent,
 } from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
@@ -41,7 +42,7 @@ export const PokemonListingScreen = ({navigation}) => {
   };
 
   if (error) {
-    return <Text>{error}</Text>;
+    return <ErrorComponent message={error} />;
   }
 
   return (

@@ -48,6 +48,7 @@ exports[`renders common components correctly renders Button correctly 1`] = `
       undefined,
     ]
   }
+  testID="button-primary"
 >
   <Text
     style={
@@ -120,6 +121,95 @@ exports[`renders common components correctly renders Checkbox correctly 1`] = `
   >
     label
   </Text>
+</View>
+`;
+
+exports[`renders common components correctly renders ErrorComponent correctly 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "textAlign": "center",
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#2e3156",
+        "fontSize": 20,
+        "marginBottom": 20,
+      }
+    }
+  >
+    test
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "justifyContent": "center",
+          "padding": 10,
+          "textAlign": "center",
+        },
+        {
+          "backgroundColor": "#FFF",
+          "borderColor": "#2e3156",
+          "borderWidth": 1,
+        },
+        undefined,
+      ]
+    }
+    testID="button-primary"
+  >
+    <Text
+      style={
+        [
+          {
+            "fontSize": 20,
+          },
+          {
+            "color": "#2e3156",
+          },
+        ]
+      }
+    >
+      Go to Home
+    </Text>
+  </View>
 </View>
 `;
 

@@ -1,4 +1,3 @@
-import {render} from '@testing-library/react-native';
 import axios from 'axios';
 
 import {

@@ -188,14 +188,14 @@ getPokemonsByTypes: () => void
 All components are tested with snapshot testing for UI stability and reliability.
 Context and other functions have been tested with unit testing with jest, ract-native-testing-library.
 
-**Overall Coverage**: 83.18%
+**Overall Coverage**: 83.91%
 
 ### Coverage report
 
 ----------------------------------|---------|----------|---------|---------|----------------------------
 File | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s  
 ----------------------------------|---------|----------|---------|---------|----------------------------
-All files | 83.18 | 56.89 | 81.42 | 83.48 |  
+All files | 83.91 | 58.62 | 83.33 | 84.23 |  
  src | 100 | 100 | 100 | 100 |  
  constants.js | 100 | 100 | 100 | 100 |  
  src/assets/images | 100 | 100 | 100 | 100 |  
@@ -208,21 +208,22 @@ All files | 83.18 | 56.89 | 81.42 | 83.48 |
  PokemonListHeader.js | 100 | 100 | 100 | 100 |  
  index.js | 0 | 0 | 0 | 0 |  
  styles.js | 100 | 100 | 100 | 100 |  
- src/components/common | 91.66 | 33.33 | 80 | 91.66 |  
+ src/components/common | 100 | 66.66 | 100 | 100 |  
  Button.js | 100 | 0 | 100 | 100 | 6  
- Checkbox.js | 75 | 50 | 66.66 | 75 | 14  
+ Checkbox.js | 100 | 100 | 100 | 100 |  
+ ErrorComponent.js | 100 | 100 | 100 | 100 |  
  Spinner.js | 100 | 100 | 100 | 100 |  
  index.js | 0 | 0 | 0 | 0 |  
  styles.js | 100 | 100 | 100 | 100 |  
  src/context | 75.78 | 48.14 | 74.19 | 75.2 |  
- contextUtils.js | 100 | 75 | 100 | 100 | 33  
+ contextUtils.js | 100 | 75 | 100 | 100 | 34  
  pokemonContext.js | 70.47 | 43.47 | 60 | 69.9 | 43,105-107,129-165,184-200
 pokemonRepository.js | 100 | 100 | 100 | 100 |  
  src/screens/PokemonDetailsScreen | 80.95 | 71.42 | 60 | 88.23 |  
  index.js | 80 | 71.42 | 60 | 87.5 | 84-93  
  styles.js | 100 | 100 | 100 | 100 |  
  src/screens/PokemonListingScreen | 92 | 64.28 | 100 | 91.66 |  
- index.js | 92 | 64.28 | 100 | 91.66 | 38-39  
+ index.js | 92 | 64.28 | 100 | 91.66 | 39-40  
  styles.js | 0 | 0 | 0 | 0 |  
 ----------------------------------|---------|----------|---------|---------|----------------------------
 

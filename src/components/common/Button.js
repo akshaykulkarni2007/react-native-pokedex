@@ -8,7 +8,7 @@ export const Button = props => {
   return (
     <Pressable
       style={[buttonStyles.button, buttonStyles[type], style]}
-      onPress={handlePress}>
+      onPress={handlePress} testID={`button-${type}`}>
       <Text style={[buttonStyles.label, buttonStyles[`${type}Label`]]}>
         {children}
       </Text>

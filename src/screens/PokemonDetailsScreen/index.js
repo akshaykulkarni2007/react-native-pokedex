@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
 import {View, ScrollView, Text, Image} from 'react-native';
 
-import {Spinner, Button} from '../../components';
+import {Spinner, Button, ErrorComponent} from '../../components';
 
 import {PokemonContext} from '../../context/pokemonContext';
 import {API_BASE_URL} from '../../constants';
@@ -33,7 +33,7 @@ export const PokemonDetailsScreen = ({route}) => {
   }
 
   if (error) {
-    return <Text>{error}</Text>;
+    return <ErrorComponent message={error} />;
   }
 
   return (

@@ -1,6 +1,7 @@
 import {get, unionBy} from 'lodash';
 
 import {fetchPokemonsByFilter, fetchPokemonDetails} from './pokemonRepository';
+
 const pokemonListItem = ({id, name, sprites, types}) => {
   return {
     id,

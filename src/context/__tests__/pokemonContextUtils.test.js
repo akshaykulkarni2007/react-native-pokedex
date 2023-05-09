@@ -1,5 +1,6 @@
 import {pokemonListItem, getPokemonsByFilter} from '../contextUtils';
 import {fetchPokemonDetails, fetchPokemonsByFilter} from '../pokemonRepository';
+
 import {
   mockPokemonItem,
   pokemonResponse,
@@ -7,6 +8,7 @@ import {
   mockTypeReponse,
   mockPokemonResponse,
 } from './fakes';
+
 jest.mock('../pokemonRepository', () => ({
   fetchPokemonsByFilter: jest.fn(() => ({data: mockTypeReponse})),
   fetchPokemonDetails: jest.fn(() => ({data: mockPokemonResponse})),

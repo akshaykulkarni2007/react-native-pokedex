@@ -50,3 +50,17 @@ export const spinnerStyles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export const errorStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
+  message: {
+    fontSize: 20,
+    color: COLORS.DARK,
+    marginBottom: 20,
+  },
+});
