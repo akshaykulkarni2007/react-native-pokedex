@@ -75,10 +75,11 @@ describe('Pokemon Context Tests', () => {
   test('fetches pokemons based on filters', () => {
     getPokemonsByFilter.mockResolvedValue([mockPokemonItem]);
     renderConsumer(true, false, '');
+
     expect(getPokemonsByFilter).toBeCalledTimes(1);
   });
 
-  test('fetch pokemons based on filters throws erros, shows error', () => {
+  test('fetch pokemons based on filters throws error, shows error', () => {
     try {
       getPokemonsByFilter.mockResolvedValue(null);
       renderConsumer(true, false, '');
@@ -94,6 +95,7 @@ describe('Pokemon Context Tests', () => {
     });
     fetchByURL.mockResolvedValue({data: pokemonResponse});
     renderConsumer(false);
+
     expect(fetchByPokemonsWithOptions).toBeCalled();
   });
 
@@ -104,6 +106,7 @@ describe('Pokemon Context Tests', () => {
       },
     });
     renderConsumer(false, true);
+
     expect(fetchByURL).toBeCalled();
   });
 

@@ -97,6 +97,12 @@ An `index.js` is created at each level to export all the modules from the enclos
 
 React Context API is utilized for state management.
 
+For better readability and clarity, context has been divided in 3 files:
+
+- `pokemonContext.js`: main file exporting logic and context provider
+- `pokemonUtils.js`: small, reusable util functions
+- `pokemonRepository.js`: reusable functions for HTTP calls with `axios`
+
 The context provides following properties:
 
 ### Properties
@@ -192,40 +198,38 @@ Context and other functions have been tested with unit testing with jest, ract-n
 
 ### Coverage report
 
-----------------------------------|---------|----------|---------|---------|----------------------------
-File | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s  
-----------------------------------|---------|----------|---------|---------|----------------------------
-All files | 85.65 | 62.06 | 88.88 | 85.13 |  
- src | 100 | 100 | 100 | 100 |  
- constants.js | 100 | 100 | 100 | 100 |  
- src/assets/images | 100 | 100 | 100 | 100 |  
- filter.png | 100 | 100 | 100 | 100 |  
- search.png | 100 | 100 | 100 | 100 |  
- src/components | 100 | 100 | 100 | 100 |  
- Card.js | 100 | 100 | 100 | 100 |  
- Filters.js | 100 | 100 | 100 | 100 |  
- PokemonEmptyList.js | 100 | 100 | 100 | 100 |  
- PokemonListHeader.js | 100 | 100 | 100 | 100 |  
- index.js | 0 | 0 | 0 | 0 |  
- styles.js | 100 | 100 | 100 | 100 |  
- src/components/common | 100 | 66.66 | 100 | 100 |  
- Button.js | 100 | 0 | 100 | 100 | 6  
- Checkbox.js | 100 | 100 | 100 | 100 |  
- ErrorComponent.js | 100 | 100 | 100 | 100 |  
- Spinner.js | 100 | 100 | 100 | 100 |  
- index.js | 0 | 0 | 0 | 0 |  
- styles.js | 100 | 100 | 100 | 100 |  
- src/context | 75.78 | 48.14 | 74.19 | 75.2 |  
- contextUtils.js | 100 | 75 | 100 | 100 | 34  
- pokemonContext.js | 70.47 | 43.47 | 60 | 69.9 | 43,105-107,129-165,184-200
-pokemonRepository.js | 100 | 100 | 100 | 100 |  
- src/screens/PokemonDetailsScreen | 100 | 85.71 | 100 | 100 |  
- index.js | 100 | 85.71 | 100 | 100 | 46-61  
- styles.js | 100 | 100 | 100 | 100 |  
- src/screens/PokemonListingScreen | 92 | 64.28 | 100 | 91.66 |  
- index.js | 92 | 64.28 | 100 | 91.66 | 39-40  
- styles.js | 0 | 0 | 0 | 0 |  
-----------------------------------|---------|----------|---------|---------|----------------------------
+| File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          |
+| -------------------------------- | ------- | -------- | ------- | ------- | -------------------------- |
+| All files                        | 85.65   | 62.06    | 88.88   | 85.13   |
+| src                              | 100     | 100      | 100     | 100     |
+| constants.js                     | 100     | 100      | 100     | 100     |
+| src/assets/images                | 100     | 100      | 100     | 100     |
+| filter.png                       | 100     | 100      | 100     | 100     |
+| search.png                       | 100     | 100      | 100     | 100     |
+| src/components                   | 100     | 100      | 100     | 100     |
+| Card.js                          | 100     | 100      | 100     | 100     |
+| Filters.js                       | 100     | 100      | 100     | 100     |
+| PokemonEmptyList.js              | 100     | 100      | 100     | 100     |
+| PokemonListHeader.js             | 100     | 100      | 100     | 100     |
+| index.js                         | 0       | 0        | 0       | 0       |
+| styles.js                        | 100     | 100      | 100     | 100     |
+| src/components/common            | 100     | 66.66    | 100     | 100     |
+| Button.js                        | 100     | 0        | 100     | 100     | 6                          |
+| Checkbox.js                      | 100     | 100      | 100     | 100     |
+| ErrorComponent.js                | 100     | 100      | 100     | 100     |
+| Spinner.js                       | 100     | 100      | 100     | 100     |
+| index.js                         | 0       | 0        | 0       | 0       |
+| styles.js                        | 100     | 100      | 100     | 100     |
+| src/context                      | 75.78   | 48.14    | 74.19   | 75.2    |
+| contextUtils.js                  | 100     | 75       | 100     | 100     | 34                         |
+| pokemonContext.js                | 70.47   | 43.47    | 60      | 69.9    | 43,105-107,129-165,184-200 |
+| pokemonRepository.js             | 100     | 100      | 100     | 100     |
+| src/screens/PokemonDetailsScreen | 100     | 85.71    | 100     | 100     |
+| index.js                         | 100     | 85.71    | 100     | 100     | 46-61                      |
+| styles.js                        | 100     | 100      | 100     | 100     |
+| src/screens/PokemonListingScreen | 92      | 64.28    | 100     | 91.66   |
+| index.js                         | 92      | 64.28    | 100     | 91.66   | 39-40                      |
+| styles.js                        | 0       | 0        | 0       | 0       |
 
 ## TODO and Improvements
 

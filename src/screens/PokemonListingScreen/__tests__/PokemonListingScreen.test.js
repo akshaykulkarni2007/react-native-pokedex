@@ -31,6 +31,7 @@ describe('renders PokemonListingScreen correctly', () => {
         </PokemonContext.Provider>,
       )
       .toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 });
@@ -83,6 +84,7 @@ describe('functional tests', () => {
     try {
       fireEvent.scroll(list);
     } catch (e) {}
+
     fireEvent(list, 'endReached');
     expect(fetchPokemons).toBeCalled();
   });
@@ -110,6 +112,7 @@ describe('functional tests', () => {
         <PokemonListingScreen navigation={{navigate: mockNavigate}} />,
       </PokemonContext.Provider>,
     );
+
     await waitFor(() => {
       expect(screen.findByTestId('card-1')).toBeTruthy();
     });
